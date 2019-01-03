@@ -35,6 +35,14 @@ add_sources("Console_uber.cpp"
 		"Console/CVars.h"
 )
 
+add_sources("Utils_uber.cpp"
+    PROJECTS Game
+    SOURCE_GROUP "Utils"
+		"Utils/Logger.h"
+		"Utils/MovingAverage.h"
+		"Utils/StringConversions.h"
+)
+
 end_sources()
 
 CryEngineModule(Game FORCE_SHARED PCH "StdAfx.cpp" SOLUTION_FOLDER "Project")
