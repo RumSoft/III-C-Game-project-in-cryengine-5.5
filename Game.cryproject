@@ -14,7 +14,7 @@
     ],
     "libs": [
       {
-        "name": "Blank Game Template",
+        "name": "Projekt gry na przedmiot programowanie w Cpp",
         "shared": {
           "any": "",
           "win_x64": "",
