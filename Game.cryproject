@@ -14,7 +14,7 @@
     ],
     "libs": [
       {
-        "name": "Projekt gry na przedmiot programowanie w Cpp"
+        "name": "Projekt gry na przedmiot programowanie w Cpp",
         "shared": {
           "any": "",
           "win_x64": "",
