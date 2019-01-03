@@ -2,3 +2,6 @@ Assets/*
 bin/
 solutions/
 Assets/
+user/
+user(1)/
+logbackups/
