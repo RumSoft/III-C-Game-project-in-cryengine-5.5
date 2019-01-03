@@ -28,6 +28,13 @@ add_sources("Components_uber.cpp"
 		"Components/Player.h"
 )
 
+add_sources("Console_uber.cpp"
+    PROJECTS Game
+    SOURCE_GROUP "Console"
+		"Console/CVars.cpp"
+		"Console/CVars.h"
+)
+
 end_sources()
 
 CryEngineModule(Game FORCE_SHARED PCH "StdAfx.cpp" SOLUTION_FOLDER "Project")
