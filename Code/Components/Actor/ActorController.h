@@ -14,7 +14,7 @@ public:
 	{
 		desc.SetGUID(CActorControllerGUID);
 		desc.SetEditorCategory("Actors");
-		desc.SetLabel("Actor");
+		desc.SetLabel("Actor Controller");
 		desc.SetIcon("icons:ObjectTypes/light.ico");
 		desc.SetComponentFlags({ EFlags::Transform });
 	}

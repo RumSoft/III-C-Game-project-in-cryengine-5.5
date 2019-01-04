@@ -9,3 +9,5 @@ uint64 CActor::GetEventMask() const
 void CActor::ProcessEvent(const SEntityEvent& event)
 {
 }
+
+CRY_STATIC_AUTO_REGISTER_FUNCTION(&registerComponent<CActor>)
