@@ -41,6 +41,7 @@ public:
 	virtual void Initialize() override;
 
 	virtual uint64 GetEventMask() const override;
+	void Update(float fFrameTime);
 	virtual void ProcessEvent(const SEntityEvent& event) override;
 	// ~IEntityComponent
 
@@ -55,10 +56,15 @@ public:
 protected:
 	void HandleInputFlagChange(TInputFlags flags, int activationMode, EInputFlagType type = EInputFlagType::Hold);
 
-protected:
+private:
 	Cry::DefaultComponents::CCameraComponent* m_pCameraComponent = nullptr;
 	Cry::DefaultComponents::CInputComponent* m_pInputComponent = nullptr;
 
+	bool aimingMode;
 	TInputFlags m_inputFlags;
 	Vec2 m_mouseDeltaRotation;
+	Vec3 aimingPoint;
+
+	void CreatePulse();
+	void CreateExplosion();
 };

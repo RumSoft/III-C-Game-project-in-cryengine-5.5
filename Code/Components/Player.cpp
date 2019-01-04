@@ -6,6 +6,7 @@
 #include <CryAction/IActionMapManager.h>
 #include "Utils/Logger.h"
 #include "Utils/StringConversions.h"
+#include <CryInput/IHardwareMouse.h>
 
 void CPlayerComponent::Initialize()
 {
@@ -34,12 +35,53 @@ void CPlayerComponent::Initialize()
 	m_pInputComponent->RegisterAction("player", "mouse_rotatepitch", [this](int activationMode, float value) { m_mouseDeltaRotation.y -= value; });
 	m_pInputComponent->BindAction("player", "mouse_rotatepitch", eAID_KeyboardMouse, EKeyId::eKI_MouseY);
 
+
+	m_pInputComponent->RegisterAction("player", "simulateexplosion", [this](int activationMode, float value) { if(aimingMode)CreateExplosion();  });
+	m_pInputComponent->BindAction("player", "simulateexplosion", eAID_KeyboardMouse, EKeyId::eKI_Mouse1);
+
+	m_pInputComponent->RegisterAction("player", "simulatepulse", [this](int activationMode, float value) { if(aimingMode)CreatePulse();  });
+	m_pInputComponent->BindAction("player", "simulatepulse", eAID_KeyboardMouse, EKeyId::eKI_Mouse2);
+
+	m_pInputComponent->RegisterAction("player", "toggleeditorattack", [this](int activationMode, float value) { aimingMode = !aimingMode; });
+	m_pInputComponent->BindAction("player", "toggleeditorattack", eAID_KeyboardMouse, EKeyId::eKI_Mouse3);
+
 	Revive();
 }
 
 uint64 CPlayerComponent::GetEventMask() const
 {
 	return ENTITY_EVENT_BIT(ENTITY_EVENT_START_GAME) | ENTITY_EVENT_BIT(ENTITY_EVENT_UPDATE);
+}
+
+void CPlayerComponent::Update(float fFrameTime)
+{
+	if (aimingMode)
+	{
+		auto h = gEnv->pRenderer->GetHeight();
+		auto w = gEnv->pRenderer->GetWidth();
+		Vec3 vPos0(0, 0, 0);
+		gEnv->pRenderer->UnProjectFromScreen(w/2.f, h/2.f, 0, &vPos0.x, &vPos0.y, &vPos0.z);
+
+		Vec3 vPos1(0, 0, 0);
+		gEnv->pRenderer->UnProjectFromScreen(w/2.f, h/2.f, 1, &vPos1.x, &vPos1.y, &vPos1.z);
+
+		Vec3 vDir = vPos1 - vPos0;
+		vDir.Normalize();
+
+		const auto rayFlags = rwi_stop_at_pierceable | rwi_colltype_any;
+		ray_hit hit;
+
+		if (gEnv->pPhysicalWorld->RayWorldIntersection(vPos0, vDir * gEnv->p3DEngine->GetMaxViewDistance(), ent_all, rayFlags, &hit, 1))
+			aimingPoint = hit.pt;
+		gEnv->pAuxGeomRenderer->DrawSphere(aimingPoint, 0.1f, ColorF(1, 0, 0));
+	}
+
+	Logger::Get().Log("player position", Vec3ToString(GetEntity()->GetWorldPos()));
+	Logger::Get().Log("player orientantion", QuatToString(GetEntity()->GetWorldRotation()));
+
+	gEnv->pAuxGeomRenderer->Draw2dLabel(10, 10, 1.75, ColorF(1, 1, 1), false, Logger::Get().ReadLog());
+	gEnv->pAuxGeomRenderer->Draw2dLabel(10, 100,
+		1.75, ColorF(1, 1, 1), false, Snackbar::Get().ReadLog());
 }
 
 void CPlayerComponent::ProcessEvent(const SEntityEvent& event)
@@ -91,12 +133,7 @@ void CPlayerComponent::ProcessEvent(const SEntityEvent& event)
 		// Apply set position and rotation to the entity
 		m_pEntity->SetWorldTM(transformation);
 
-		Logger::Get().Log("player position", Vec3ToString(GetEntity()->GetWorldPos()));
-		Logger::Get().Log("player orientantion", QuatToString(GetEntity()->GetWorldRotation()));
-
-		gEnv->pAuxGeomRenderer->Draw2dLabel(10, 10, 1.75, ColorF(1,1,1), false, Logger::Get().ReadLog());
-		gEnv->pAuxGeomRenderer->Draw2dLabel(10, 100, 
-			1.75, ColorF(1, 1, 1), false, Snackbar::Get().ReadLog());
+		Update(pCtx->fFrameTime);
 	}
 	break;
 	}
@@ -125,6 +162,7 @@ void CPlayerComponent::Revive()
 	// Reset input now that the player respawned
 	m_inputFlags = 0;
 	m_mouseDeltaRotation = ZERO;
+	aimingMode = false;
 }
 
 void CPlayerComponent::HandleInputFlagChange(TInputFlags flags, int activationMode, EInputFlagType type)
@@ -153,4 +191,23 @@ void CPlayerComponent::HandleInputFlagChange(TInputFlags flags, int activationMo
 	}
 	break;
 	}
+}
+
+void CPlayerComponent::CreatePulse()
+{
+	Snackbar::Get().Log("created pulse");
+	pe_action_impulse actionImpulse;
+	actionImpulse.impulse = Vec3(0, 0, 1);
+	actionImpulse.angImpulse = Vec3(0, 0, 1);
+	int isThreadSafe = 0;
+	auto ent = gEnv->pPhysicalWorld->CreatePhysicalEntity(pe_type::PE_STATIC);
+	ent->Action(&actionImpulse);
+
+}
+
+void CPlayerComponent::CreateExplosion()
+{
+	Snackbar::Get().Log("created explosion");
+
+	gEnv->pPhysicalWorld->SimulateExplosion(aimingPoint, Vec3(1, 1, 1), 0.5, 1, 0.75, 1);
 }
