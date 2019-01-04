@@ -26,6 +26,13 @@ add_sources("Components_uber.cpp"
     SOURCE_GROUP "Components"
 		"Components/Player.cpp"
 		"Components/Player.h"
+	SOURCE_GROUP "Components\\\\Actor"
+		"Components/Actor/Actor.cpp"
+		"Components/Actor/Actor.h"
+		"Components/Actor/ActorController.cpp"
+		"Components/Actor/ActorController.h"
+		"Components/Actor/IActor.cpp"
+		"Components/Actor/IActor.h"
 )
 
 add_sources("Console_uber.cpp"
