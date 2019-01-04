@@ -8,6 +8,8 @@
 #include <DefaultComponents/Cameras/CameraComponent.h>
 #include <DefaultComponents/Input/InputComponent.h>
 
+class CGamePlugin;
+
 ////////////////////////////////////////////////////////
 // Represents a player participating in gameplay
 ////////////////////////////////////////////////////////
@@ -34,6 +36,7 @@ public:
 	CPlayerComponent() = default;
 	virtual ~CPlayerComponent() {}
 
+	friend CGamePlugin;
 	// IEntityComponent
 	virtual void Initialize() override;
 

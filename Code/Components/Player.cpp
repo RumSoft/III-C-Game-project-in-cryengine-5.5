@@ -2,6 +2,10 @@
 #include "Player.h"
 
 #include <CryRenderer/IRenderAuxGeom.h>
+#include <CryEntitySystem/IEntity.h>
+#include <CryAction/IActionMapManager.h>
+#include "Utils/Logger.h"
+#include "Utils/StringConversions.h"
 
 void CPlayerComponent::Initialize()
 {
@@ -57,21 +61,13 @@ void CPlayerComponent::ProcessEvent(const SEntityEvent& event)
 
 		// Check input to calculate local space velocity
 		if (m_inputFlags & (TInputFlags)EInputFlag::MoveLeft)
-		{
 			velocity.x -= moveSpeed * pCtx->fFrameTime;
-		}
 		if (m_inputFlags & (TInputFlags)EInputFlag::MoveRight)
-		{
 			velocity.x += moveSpeed * pCtx->fFrameTime;
-		}
 		if (m_inputFlags & (TInputFlags)EInputFlag::MoveForward)
-		{
 			velocity.y += moveSpeed * pCtx->fFrameTime;
-		}
 		if (m_inputFlags & (TInputFlags)EInputFlag::MoveBack)
-		{
 			velocity.y -= moveSpeed * pCtx->fFrameTime;
-		}
 
 		// Update the player's transformation
 		Matrix34 transformation = m_pEntity->GetWorldTM();
@@ -94,6 +90,13 @@ void CPlayerComponent::ProcessEvent(const SEntityEvent& event)
 
 		// Apply set position and rotation to the entity
 		m_pEntity->SetWorldTM(transformation);
+
+		Logger::Get().Log("player position", Vec3ToString(GetEntity()->GetWorldPos()));
+		Logger::Get().Log("player orientantion", QuatToString(GetEntity()->GetWorldRotation()));
+
+		gEnv->pAuxGeomRenderer->Draw2dLabel(10, 10, 1.75, ColorF(1,1,1), false, Logger::Get().ReadLog());
+		gEnv->pAuxGeomRenderer->Draw2dLabel(10, 100, 
+			1.75, ColorF(1, 1, 1), false, Snackbar::Get().ReadLog());
 	}
 	break;
 	}

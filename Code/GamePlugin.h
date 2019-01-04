@@ -8,6 +8,7 @@
 #include <CrySchematyc/Reflection/TypeDesc.h>
 #include <CrySchematyc/Env/IEnvRegistrar.h>
 #include <CrySchematyc/Env/Elements/EnvComponent.h>
+#include <Utils/Logger.h>
 
 class CPlayerComponent;
 
@@ -33,6 +34,9 @@ public:
 	// ISystemEventListener
 	virtual void OnSystemEvent(ESystemEvent event, UINT_PTR wparam, UINT_PTR lparam) override;
 	// ~ISystemEventListener
+
+	static Logger& Logger()	{ return Logger::Get(); }
+	static Snackbar& Snackbar() { return Snackbar::Get(); }
 
 	// INetworkedClientListener
 	// Sent to the local client on disconnect
