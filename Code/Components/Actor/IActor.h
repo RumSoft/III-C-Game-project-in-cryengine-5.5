@@ -1,6 +1,8 @@
 #pragma once
 #include "GamePlugin.h"
 
+#define debug
+
 struct IActor : IEntityComponent
 {
 #pragma region base
@@ -10,8 +12,6 @@ public:
 
 protected:
 	friend CGamePlugin;
-	virtual uint64 GetEventMask() const override;
-	virtual void ProcessEvent(const SEntityEvent& event) override;
 	static void ReflectType(Schematyc::CTypeDesc<IActor>& desc)
 	{
 		desc.SetGUID(IActorGUID);
@@ -25,4 +25,8 @@ protected:
 public:
 	virtual void OnKill() = 0;
 	virtual void OnSpawn() = 0;
+
+protected:
+	virtual void Update(float fFrameTime) = 0;
+
 };

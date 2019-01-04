@@ -8,6 +8,20 @@ uint64 CActor::GetEventMask() const
 
 void CActor::ProcessEvent(const SEntityEvent& event)
 {
+	switch(event.event)
+	{
+	case ENTITY_EVENT_UPDATE:
+		SEntityUpdateContext* pCtx = (SEntityUpdateContext*)event.nParam[0];
+		Update(pCtx->fFrameTime);
+	}
+}
+
+void CActor::Update(float fFrameTime)
+{
+	gEnv->pAuxGeomRenderer->DrawSphere(GetEntity()->GetWorldPos(), 0.5f, ColorF(1, 1, 0), false);
+	VALIDATORS_START
+	
+	gEnv->pAuxGeomRenderer->RenderTextQueued(GetEntity()->GetWorldPos(), 0, GetEntity()->GetName());
 }
 
 CRY_STATIC_AUTO_REGISTER_FUNCTION(&registerComponent<CActor>)

@@ -21,5 +21,8 @@ public:
 #pragma endregion base
 	void OnKill() override {};
 	void OnSpawn() override {};
+
+protected:
+	void Update(float fFrameTime) override;
 };
 
