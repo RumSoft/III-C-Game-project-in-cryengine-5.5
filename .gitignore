@@ -5,3 +5,4 @@ Assets/
 user/
 user(1)/
 logbackups/
+*.log

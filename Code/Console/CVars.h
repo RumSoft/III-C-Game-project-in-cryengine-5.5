@@ -12,8 +12,8 @@ public:
 	void RegisterVariables();
 	void UnregisterVariables();
 
-	int m_debugai;
-	int m_debugactor;
+	int m_debug_ai;
+	int m_debug_actor;
 };
 
 extern CCVars g_cvars;
