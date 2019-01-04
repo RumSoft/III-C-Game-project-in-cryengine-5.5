@@ -21,4 +21,8 @@ protected:
 		desc.SetComponentFlags({ EFlags::Transform });
 	}
 #pragma endregion
+
+public:
+	virtual void OnKill() = 0;
+	virtual void OnSpawn() = 0;
 };

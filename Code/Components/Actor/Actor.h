@@ -19,5 +19,7 @@ public:
 		desc.SetComponentFlags({ EFlags::Transform });
 	}
 #pragma endregion base
+	void OnKill() override {};
+	void OnSpawn() override {};
 };
 
