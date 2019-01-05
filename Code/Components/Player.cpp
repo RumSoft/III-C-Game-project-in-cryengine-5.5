@@ -36,13 +36,13 @@ void CPlayerComponent::Initialize()
 	m_pInputComponent->BindAction("player", "mouse_rotatepitch", eAID_KeyboardMouse, EKeyId::eKI_MouseY);
 
 
-	m_pInputComponent->RegisterAction("player", "simulateexplosion", [this](int activationMode, float value) { if(aimingMode)CreateExplosion();  });
+	m_pInputComponent->RegisterAction("player", "simulateexplosion", [this](int activationMode, float value) { if (activationMode == eIS_Released) if(aimingMode)CreateExplosion();  });
 	m_pInputComponent->BindAction("player", "simulateexplosion", eAID_KeyboardMouse, EKeyId::eKI_Mouse1);
 
-	m_pInputComponent->RegisterAction("player", "simulatepulse", [this](int activationMode, float value) { if(aimingMode)CreatePulse();  });
+	m_pInputComponent->RegisterAction("player", "simulatepulse", [this](int activationMode, float value) { if (activationMode == eIS_Released) if(aimingMode)CreatePulse();  });
 	m_pInputComponent->BindAction("player", "simulatepulse", eAID_KeyboardMouse, EKeyId::eKI_Mouse2);
 
-	m_pInputComponent->RegisterAction("player", "toggleeditorattack", [this](int activationMode, float value) { aimingMode = !aimingMode; });
+	m_pInputComponent->RegisterAction("player", "toggleeditorattack", [this](int activationMode, float value) { if(activationMode == eIS_Released) aimingMode = !aimingMode; });
 	m_pInputComponent->BindAction("player", "toggleeditorattack", eAID_KeyboardMouse, EKeyId::eKI_Mouse3);
 
 	Revive();
