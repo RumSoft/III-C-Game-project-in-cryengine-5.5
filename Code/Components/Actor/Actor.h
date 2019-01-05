@@ -8,6 +8,7 @@ class CActor : public IActor
 public:
 	// Provide a virtual destructor, ensuring correct destruction of IEntityComponent members
 	virtual ~CActor() = default;
+	void Initialize() override;
 	virtual uint64 GetEventMask() const override;
 	virtual void ProcessEvent(const SEntityEvent& event) override;
 	static void ReflectType(Schematyc::CTypeDesc<CActor>& desc)

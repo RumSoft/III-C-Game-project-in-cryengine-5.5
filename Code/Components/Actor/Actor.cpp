@@ -2,6 +2,7 @@
 #include "Actor.h"
 
 
+
 uint64 CActor::GetEventMask() const
 {
 	return ENTITY_EVENT_BIT(ENTITY_EVENT_UPDATE);
@@ -9,17 +10,30 @@ uint64 CActor::GetEventMask() const
 
 void CActor::ProcessEvent(const SEntityEvent& event)
 {
-	switch(event.event)
+	switch (event.event)
 	{
+	case ENTITY_EVENT_INIT:
+	case ENTITY_EVENT_START_GAME:
+	case ENTITY_EVENT_RESET:
+		break;
 	case ENTITY_EVENT_UPDATE:
-		SEntityUpdateContext* pCtx = (SEntityUpdateContext*)event.nParam[0];
+		const auto pCtx = (SEntityUpdateContext*)event.nParam[0];
 		Update(pCtx->fFrameTime);
+		break;
 	}
 }
 
+
+void CActor::Initialize()
+{
+		Snackbar::Get().Log(GetEntity()->GetName(), 5);
+}
+
+
+
 void CActor::Update(float fFrameTime)
 {
-	gEnv->pAuxGeomRenderer->DrawSphere(GetEntity()->GetWorldPos(), 0.5f, ColorF(1, 1, 0,.5));
+	gEnv->pAuxGeomRenderer->DrawSphere(GetEntity()->GetWorldPos(), 0.25f, ColorF(1, 1, 0, .5));
 
 
 }
