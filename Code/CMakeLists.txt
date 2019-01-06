@@ -37,6 +37,10 @@ add_sources("Components_uber.cpp"
 		"Components/Actor/Actions/IAction.h"
 	SOURCE_GROUP "Components\\\\Actor\\\\State"
 		"Components/Actor/State/IActorState.h"
+	SOURCE_GROUP "Components\\\\Inventory"
+		"Components/Inventory/Inventory.h"
+	SOURCE_GROUP "Components\\\\Attributes"
+		"Components/Attributes/Attributes.h"
 )
 
 add_sources("AI_uber.cpp"
