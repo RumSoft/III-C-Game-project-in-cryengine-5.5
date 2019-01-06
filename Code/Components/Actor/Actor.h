@@ -3,6 +3,7 @@
 #include "GamePlugin.h"
 #include <DefaultComponents/Geometry/AdvancedAnimationComponent.h>
 #include <DefaultComponents/Physics/CharacterControllerComponent.h>
+#include "State/IActorState.h"
 
 class CActor : public IActor
 {
@@ -28,11 +29,13 @@ public:
 	void Revive() override;
 protected:
 	void Update(float fFrameTime) override;
-
+	IActorState* GetState() { return m_pActorState; }
 private:
 	Cry::DefaultComponents::CCharacterControllerComponent* m_pCharacterController = nullptr;
 	Cry::DefaultComponents::CAdvancedAnimationComponent* m_pAnimationComponent = nullptr;
 	Cry::DefaultComponents::CInputComponent* m_pInputComponent = nullptr;
+
+	IActorState* m_pActorState = nullptr;
 
 	FragmentID m_idleFragmentId;
 	FragmentID m_walkFragmentId;
