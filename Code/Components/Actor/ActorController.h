@@ -31,20 +31,26 @@ public:
 	}
 
 public:
-	CAdvancedAnimationComponent*	GetAnimationComponent()		{ return m_pAdvancedAnimationComponent; }
-	CCharacterControllerComponent*	GetCharacterController()	{ return m_pCharacterControllerComponent; }
+	CAdvancedAnimationComponent*	GetAnimationComponent()		{ return m_pAnimation; }
+	CCharacterControllerComponent*	GetCharacterController()	{ return m_pCharacterController; }
 	CPathfindingComponent*			GetPathfindingComponent()	{ return m_pPathfindingComponent; }
-	IEntityBehaviorTreeComponent*	GetBehaviorTreeComponent()	{ return m_pBehaviorTreeComponent; }
-	IEntityNavigationComponent*		GetNavigationComponent()	{ return m_pNavigationComponent; }
-	IEntityCoverUserComponent*		GetCoverUserComponent()		{ return m_pCoverUserComponent; }
+	IEntityBehaviorTreeComponent*	GetBehaviorTreeComponent()	{ return m_pBehaviorTree; }
+	IEntityNavigationComponent*		GetNavigationComponent()	{ return m_pNavigation; }
+	IEntityCoverUserComponent*		GetCoverUserComponent()		{ return m_pCoverUser; }
 
 private:
-	CAdvancedAnimationComponent*	m_pAdvancedAnimationComponent	= nullptr;
-	CCharacterControllerComponent*	m_pCharacterControllerComponent = nullptr;
-	CPathfindingComponent*			m_pPathfindingComponent			= nullptr;
-	IEntityBehaviorTreeComponent*	m_pBehaviorTreeComponent		= nullptr;
-	IEntityNavigationComponent*		m_pNavigationComponent			= nullptr;
-	IEntityCoverUserComponent*		m_pCoverUserComponent			= nullptr;
+	CAdvancedAnimationComponent*	m_pAnimation			= nullptr;
+	CCharacterControllerComponent*	m_pCharacterController	= nullptr;
+	CPathfindingComponent*			m_pPathfindingComponent	= nullptr;
+	IEntityBehaviorTreeComponent*	m_pBehaviorTree			= nullptr;
+	IEntityNavigationComponent*		m_pNavigation			= nullptr;
+	IEntityCoverUserComponent*		m_pCoverUser			= nullptr;
+
+	FragmentID m_idleFragmentId;
+	FragmentID m_walkFragmentId;
+	TagID m_rotateTagId; 
+	FragmentID m_activeFragmentId;
+	float m_movementSpeed = 10.f;
 
 #pragma endregion
 

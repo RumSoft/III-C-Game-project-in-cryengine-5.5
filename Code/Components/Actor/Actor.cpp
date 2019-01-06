@@ -5,7 +5,9 @@
 
 uint64 CActor::GetEventMask() const
 {
-	 return ENTITY_EVENT_BIT(ENTITY_EVENT_START_GAME) | ENTITY_EVENT_BIT(ENTITY_EVENT_UPDATE);
+	return ENTITY_EVENT_BIT(ENTITY_EVENT_START_GAME)
+		| ENTITY_EVENT_BIT(ENTITY_EVENT_UPDATE)
+		| ENTITY_EVENT_BIT(ENTITY_EVENT_RESET);
 }
 
 void CActor::ProcessEvent(const SEntityEvent& event)
@@ -42,6 +44,12 @@ void CActor::Revive()
 void CActor::Update(float fFrameTime)
 {
 	gEnv->pAuxGeomRenderer->DrawSphere(GetEntity()->GetWorldPos(), 0.25f, ColorF(1, 1, 0, .5));
+	slowupdate += fFrameTime;
+	if(slowupdate >= 1)
+	{
+		slowupdate = 0;
+		GetController()->GetPathfindingComponent()->RequestMoveTo(GetEntity()->GetWorldPos() + Vec3(4, 4, 0));
+	}
 }
 
 CRY_STATIC_AUTO_REGISTER_FUNCTION(&registerComponent<CActor>)

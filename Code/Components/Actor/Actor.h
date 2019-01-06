@@ -41,5 +41,6 @@ private:
 	CInventory*			m_pInventory = nullptr; //equipment: weapon,armour,skills? and consumables
 	CAttributes*		m_pAttributes = nullptr; //health, mana, some other effects
 	IEntityFactionComponent* m_pFactionComponent = nullptr;
+	float slowupdate;
 };
 
