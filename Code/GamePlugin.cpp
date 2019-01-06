@@ -10,6 +10,8 @@
 #include <CrySchematyc/Env/EnvPackage.h>
 #include <CrySchematyc/Utils/SharedString.h>
 
+#define debug
+
 // Included only once per DLL module.
 #include <CryCore/Platform/platform_impl.inl>
 
