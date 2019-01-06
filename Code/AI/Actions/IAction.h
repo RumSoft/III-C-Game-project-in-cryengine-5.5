@@ -1,14 +1,14 @@
 #pragma once
 #include "Components/Actor/ActorController.h"
 
-class IAction
+class IActorAction
 {
 public:
-	virtual ~IAction() = default;
+	virtual ~IActorAction() = default;
 	virtual void Process(CActorController* controller) = 0;
 };
 
-class MoveToAction : IAction
+class MoveToAction : IActorAction
 {
 public:
 	void Process(CActorController* controller) override
@@ -17,7 +17,7 @@ public:
 	}
 };
 
-class MoveBy : IAction
+class MoveBy : IActorAction
 {
 public:
 	void Process(CActorController* controller) override
