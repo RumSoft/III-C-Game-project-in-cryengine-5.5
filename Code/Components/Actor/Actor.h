@@ -7,15 +7,14 @@
 #include <CryAISystem/Components/IEntityNavigationComponent.h>
 #include <CryAISystem/Components/IEntityCoverUserComponent.h>
 #include <CryAISystem/Components/IEntityBehaviorTreeComponent.h>
-#include <CryAISystem/Components/IEntityObservableComponent.h>
-//#include <CryAISystem/Components/IEntityObserverComponent.h>
-#include <CryAISystem/Components/IEntityListenerComponent.h>
+#include <CryAISystem/Components/IEntityObserverComponent.h>
 #include <CryAISystem/Components/IEntityFactionComponent.h>
 //#include <DefaultComponents/Effects/ParticleComponent.h>
 #include "State/IActorState.h"
 #include <DefaultComponents/Input/InputComponent.h>
+#include <CryAISystem/ICoverSystem.h>
 
-class IEntityObserverComponent;
+//class IEntityObserverComponent;
 
 class CActor : public IActor
 {
@@ -53,7 +52,7 @@ public:
 	bool CanSeeEnemy()
 	{
 		
-		return nullptr;
+		return false;
 	}
 	int DealDamage(int damage) { Health -= damage; if (Health <= 0) Kill(); }
 
@@ -85,13 +84,10 @@ private:
 	Cry::DefaultComponents::CPathfindingComponent* m_pPathfindingComponent = nullptr;
 	IEntityCoverUserComponent* m_pCoverUserComponent = nullptr;
 	IEntityNavigationComponent* m_pNavigationComponent = nullptr;
-	IEntityListenerComponent* m_pListenerComponent = nullptr;
-	IEntityObservableComponent* m_pObservableComponent = nullptr;
-	IEntityObserverComponent* m_pObserverComponent = nullptr;
 	IEntityBehaviorTreeComponent* m_pBehaviorTreeComponent = nullptr;
 	IEntityFactionComponent* m_pFactionComponent = nullptr;
 	IActorState* m_pActorState = nullptr;
-
+	
 	FragmentID m_idleFragmentId;
 	FragmentID m_walkFragmentId;
 	FragmentID m_activeFragmentId;

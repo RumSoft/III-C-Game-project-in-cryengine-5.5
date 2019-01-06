@@ -47,8 +47,6 @@ void CActor::Initialize()
 	m_walkFragmentId = m_pAnimationComponent->GetFragmentId("Walk");
 	m_rotateTagId = m_pAnimationComponent->GetTagId("Rotate");
 
-	m_pPathfindingComponent = m_pEntity->GetOrCreateComponent<Cry::DefaultComponents::CPathfindingComponent>();
-	m_pPathfindingComponent->SetMaxAcceleration(m_movementSpeed);
 
 	m_pNavigationComponent = m_pEntity->GetOrCreateComponent<IEntityNavigationComponent>();
 
@@ -58,24 +56,27 @@ void CActor::Initialize()
 	movementProperties.maxAcceleration = m_movementSpeed;
 	m_pNavigationComponent->SetMovementProperties(movementProperties);
 	m_pNavigationComponent->SetNavigationAgentType("MediumSizedCharacters");
-
 	m_pNavigationComponent->SetStateUpdatedCallback([this](const Vec3& recommendedVelocity)
 	{
 		m_pCharacterController->ChangeVelocity(recommendedVelocity, Cry::DefaultComponents::CCharacterControllerComponent::EChangeVelocityMode::SetAsTarget);
 	});
 
+	m_pPathfindingComponent = m_pEntity->GetOrCreateComponent<Cry::DefaultComponents::CPathfindingComponent>();
+	m_pPathfindingComponent->SetMaxAcceleration(m_movementSpeed);
+	m_pPathfindingComponent->SetMovementRecommendationCallback([this](const Vec3& recommendedVelocity)
+	{
+		m_pCharacterController->ChangeVelocity(recommendedVelocity, Cry::DefaultComponents::CCharacterControllerComponent::EChangeVelocityMode::SetAsTarget);
+	});
+
+
 	m_pCoverUserComponent = GetEntity()->GetOrCreateComponent<IEntityCoverUserComponent>();
-
-
-	m_pObservableComponent = GetEntity()->GetOrCreateComponent<IEntityObservableComponent>();
-
 	//m_pBehaviorTreeComponent = GetEntity()->GetOrCreateComponent<IEntityBehaviorTreeComponent>();
 	//m_pBehaviorTreeComponent->SetBBKeyValue()
 
 	m_pFactionComponent = GetEntity()->GetOrCreateComponent<IEntityFactionComponent>();
 	m_pFactionComponent->SetFactionId(cry_random_uint32() % 10);
 
-	m_pListenerComponent = GetEntity()->GetOrCreateComponent<IEntityListenerComponent>();
+
 
 
 
@@ -93,8 +94,11 @@ void CActor::Revive()
 
 	m_pAnimationComponent->ResetCharacter();
 	m_pCharacterController->Physicalize();
-	
 	m_activeFragmentId = FRAGMENT_ID_INVALID;
+
+	//m_pPathfindingComponent->RequestMoveTo(GetEntity()->GetWorldPos() + Vec3(5, 5, 0));
+
+	m_pNavigationComponent->NavigateTo(GetEntity()->GetWorldPos() + Vec3(5, 5, 0));
 }
 
 void CActor::UpdateAI(float fFrameTime)
@@ -107,7 +111,9 @@ void CActor::UpdateAI(float fFrameTime)
 		break;
 	case Idle:
 		Logger::Get().Log(GetEntity()->GetName(), "idle");
-		CanSeeEnemy();
+		//m_pNavigationComponent->NavigateTo(GetEntity()->GetWorldPos() + Vec3(5, 5, 0));
+		//m_pPathfindingComponent->RequestMoveTo(GetEntity()->GetWorldPos() + Vec3(5, 5, 0));
+
 		if(enemyQueue.size())
 			actorState = Attacking;
 		break;

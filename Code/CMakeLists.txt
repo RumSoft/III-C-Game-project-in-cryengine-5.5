@@ -33,6 +33,8 @@ add_sources("Components_uber.cpp"
 		"Components/Actor/ActorController.h"
 		"Components/Actor/IActor.cpp"
 		"Components/Actor/IActor.h"
+	SOURCE_GROUP "Components\\\\Actor\\\\Actions"
+		"Components/Actor/Actions/IAction.h"
 	SOURCE_GROUP "Components\\\\Actor\\\\State"
 		"Components/Actor/State/IActorState.h"
 )
@@ -41,8 +43,6 @@ add_sources("AI_uber.cpp"
 	PROJECTS Game
 	SOURCE_GROUP "AI"
 		"AI/BehaviorTree.h"
-	SOURCE_GROUP "AI\\\\Actions"
-		"AI/Actions/IAction.h"
 	SOURCE_GROUP "AI\\\\Trees"
 		"AI/Trees/ITree.h"
 )
