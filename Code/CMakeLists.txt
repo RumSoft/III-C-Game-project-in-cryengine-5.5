@@ -23,9 +23,9 @@ add_sources("Code_uber.cpp"
 )
 add_sources("Components_uber.cpp"
     PROJECTS Game
-    SOURCE_GROUP "Components"
-		"Components/Player.cpp"
-		"Components/Player.h"
+    SOURCE_GROUP "Components\\\\Player"
+		"Components/Player/Player.cpp"
+		"Components/Player/Player.h"
 	SOURCE_GROUP "Components\\\\Actor"
 		"Components/Actor/Actor.cpp"
 		"Components/Actor/Actor.h"

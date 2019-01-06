@@ -1,7 +1,7 @@
 #include "StdAfx.h"
 #include "GamePlugin.h"
 
-#include "Components/Player.h"
+#include "Components/Player/Player.h"
 
 #include <IGameObjectSystem.h>
 #include <IGameObject.h>
