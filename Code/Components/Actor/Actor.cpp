@@ -48,7 +48,8 @@ void CActor::Update(float fFrameTime)
 	if(slowupdate >= 1)
 	{
 		slowupdate = 0;
-		GetController()->GetPathfindingComponent()->RequestMoveTo(GetEntity()->GetWorldPos() + Vec3(4, 4, 0));
+		//GetController()->GetNavigationComponent()->NavigateTo(GetEntity()->GetWorldPos() + Vec3(4, 4, 0));
+		//GetController()->GetPathfindingComponent()->RequestMoveTo(GetEntity()->GetWorldPos() + Vec3(4, 4, 0));
 	}
 }
 

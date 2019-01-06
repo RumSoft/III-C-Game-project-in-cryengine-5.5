@@ -50,7 +50,7 @@ private:
 	FragmentID m_walkFragmentId;
 	TagID m_rotateTagId; 
 	FragmentID m_activeFragmentId;
-	float m_movementSpeed = 10.f;
+	float m_movementSpeed = 5.f;
 
 #pragma endregion
 

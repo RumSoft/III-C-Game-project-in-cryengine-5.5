@@ -22,20 +22,32 @@ void CActorController::Initialize()
 	m_pCharacterController	= GetEntity()->GetOrCreateComponent<CCharacterControllerComponent>();
 	m_pCharacterController->SetTransformMatrix(Matrix34::Create(Vec3(1.f), IDENTITY, Vec3(0, 0, 1.f)));
 
-
 	//CPathfindingComponent
 	m_pPathfindingComponent	= GetEntity()->GetOrCreateComponent<CPathfindingComponent>();
 	m_pPathfindingComponent->SetMaxAcceleration(m_movementSpeed);
-	m_pPathfindingComponent->SetMovementRecommendationCallback([this](const Vec3& recommendedVelocity)
-	{
-		m_pCharacterController->ChangeVelocity(recommendedVelocity, Cry::DefaultComponents::CCharacterControllerComponent::EChangeVelocityMode::SetAsTarget);
+	m_pPathfindingComponent->SetMovementRecommendationCallback([this](const Vec3& recommendedVelocity)	{
+		m_pCharacterController->ChangeVelocity(recommendedVelocity,
+		                                       Cry::DefaultComponents::CCharacterControllerComponent::
+		                                       EChangeVelocityMode::SetAsTarget);
 	});
-
-	//IEntityBehaviorTreeComponent
-	m_pBehaviorTree = GetEntity()->GetOrCreateComponent<IEntityBehaviorTreeComponent>();
 
 	//IEntityNavigationComponent
 	m_pNavigation = GetEntity()->GetOrCreateComponent<IEntityNavigationComponent>();
+	m_pNavigation->SetCollisionAvoidanceProperties(IEntityNavigationComponent::SCollisionAvoidanceProperties{
+		1.f, IEntityNavigationComponent::SCollisionAvoidanceProperties::EType::Active
+		});
+	m_pNavigation->SetMovementProperties(IEntityNavigationComponent::SMovementProperties{
+		m_movementSpeed, m_movementSpeed, m_movementSpeed, m_movementSpeed, m_movementSpeed, 2, true
+		});
+	m_pNavigation->SetStateUpdatedCallback([this](const Vec3& recommendedVelocity) {
+		m_pCharacterController->ChangeVelocity(recommendedVelocity,
+		                                       Cry::DefaultComponents::CCharacterControllerComponent::
+		                                       EChangeVelocityMode::SetAsTarget);
+	});
+	m_pNavigation->SetNavigationAgentType("MediumSizedCharacters");
+
+	//IEntityBehaviorTreeComponent
+	m_pBehaviorTree = GetEntity()->GetOrCreateComponent<IEntityBehaviorTreeComponent>();
 
 	//IEntityCoverUserComponent
 	m_pCoverUser = GetEntity()->GetOrCreateComponent<IEntityCoverUserComponent>();
