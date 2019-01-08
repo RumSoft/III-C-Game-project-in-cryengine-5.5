@@ -75,3 +75,7 @@ static void registerComponent(Schematyc::IEnvRegistrar& registrar)
 #define IActorGUID "{57AE3A90-AB96-468F-AAA0-3BABA73B0551}"_cry_guid
 #define CActorGUID "{903918CF-FC5F-4C9D-880F-23AF970B409D}"_cry_guid
 #define CActorControllerGUID "{712DF623-25C7-41C7-A085-9E27517258BE}"_cry_guid
+#define CAIComponentGUID "{AACB7C55-4E30-4A2A-93B9-2571631DB3BA}_cry_guid"
+#define CInventoryGUID "{620546B7-7A34-4472-AFE8-65BB8223B55D}_cry_guid"
+#define CAttributesGUID "{6D1B110E-5F79-4E34-AE7B-9B4762561410}_cry_guid"
+#define CItemGuid "{33DAABF8-7BD2-4DFE-A338-BF298585B8B1}_cry_guid"

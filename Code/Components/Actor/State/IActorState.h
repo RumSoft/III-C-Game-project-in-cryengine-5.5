@@ -28,7 +28,7 @@ public:
 	void Exit(CActor* actor) override {}
 };
 
-class ActorSprintingState : public IActorState
+class ActorSprintingState : IActorState
 {
 public:
 	void Enter(CActor* actor) override {}

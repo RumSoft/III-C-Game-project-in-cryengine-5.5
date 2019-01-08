@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 #include "Actor.h"
 #include <CryMath/Random.h>
+#include "AI/Actions/IAction.h"
 
 
 uint64 CActor::GetEventMask() const
@@ -45,9 +46,14 @@ void CActor::Update(float fFrameTime)
 {
 	gEnv->pAuxGeomRenderer->DrawSphere(GetEntity()->GetWorldPos(), 0.25f, ColorF(1, 1, 0, .5));
 	slowupdate += fFrameTime;
-	if(slowupdate >= 1)
+	if(slowupdate >= 5)
 	{
 		slowupdate = 0;
+		ActorAction* x = nullptr;
+
+		x = new HideInCoverAction();
+		x->Process(GetController());
+		delete x;
 		//GetController()->GetNavigationComponent()->NavigateTo(GetEntity()->GetWorldPos() + Vec3(4, 4, 0));
 		//GetController()->GetPathfindingComponent()->RequestMoveTo(GetEntity()->GetWorldPos() + Vec3(4, 4, 0));
 	}

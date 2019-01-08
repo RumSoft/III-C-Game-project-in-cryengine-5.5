@@ -5,37 +5,40 @@
     <Node Id="(@1 @3 @5 Member=(Name=CActor OverloadingParameters=[(Type=&quot;CActor const &amp;&quot;)]))" Category="CodeSchema_Method" Bounds="-76.7083333333334,49.02,71.9833333333333,25.96" DelayedCrossGroupLinksState="Fetched" Label="CActor" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" UseManualLocation="True" />
     <Node Id="(@1 @3 @5 Member=(Name=ReflectType OverloadingParameters=[(Type=&quot;Schematyc::CTypeDesc&lt;CActor,void&gt; &amp;&quot;)]))" Category="CodeSchema_Method" Bounds="-178.691666666667,104.98,96.4166666666667,25.9600000000001" DelayedCrossGroupLinksState="Fetched" Label="ReflectType" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" UseManualLocation="True" />
     <Node Id="(@1 @3 @5 Member=CActor)" Category="CodeSchema_Method" Bounds="-178.691666666667,49.02,71.9833333333333,25.96" DelayedCrossGroupLinksState="Fetched" Label="CActor" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" UseManualLocation="True" />
-    <Node Id="(@1 @3 @5 Member=GetAttributes)" Category="CodeSchema_Method" Bounds="82.1749999999999,104.98,106.81,25.9600000000001" DelayedCrossGroupLinksState="Fetched" Label="GetAttributes" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" UseManualLocation="True" />
     <Node Id="(@1 @3 @5 Member=GetEventMask)" Category="CodeSchema_Method" Bounds="-41.3316666666667,160.94,111.466666666667,25.96" DelayedCrossGroupLinksState="Fetched" Label="GetEventMask" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" UseManualLocation="True" />
     <Node Id="(@1 @3 @5 Member=GetFactionComponent)" Category="CodeSchema_Method" Bounds="100.135,160.94,155.273333333333,25.96" DelayedCrossGroupLinksState="Fetched" Label="GetFactionComponent" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" UseManualLocation="True" />
-    <Node Id="@10" Category="CodeSchema_Class" Bounds="-111.150474719999,121.99998126922,163.223333333333,25" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Icon="CodeSchema_Class" Label="CPlayerComponent" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" NativeProvider_CodeItemIds="Microsoft.VisualStudio.Progression.SmallList`1[System.Int64]" NativeProvider_IsSealed="True" NativeProvider_TypeName="CPlayerComponent" />
-    <Node Id="@11" Category="CodeSchema_Method" Bounds="27.4249999999999,-6.94000000000006,74.8133333333333,25.96" DelayedCrossGroupLinksState="Fetched" Label="Update" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" UseManualLocation="True" />
-    <Node Id="@12" Category="CodeSchema_Method" Bounds="115.391666666667,-62.9000000000001,104.88,25.96" DelayedCrossGroupLinksState="Fetched" Label="ProcessEvent" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" UseManualLocation="True" />
-    <Node Id="@13" Category="CodeSchema_Method" Bounds="-178.691666666667,-62.9000000000001,176.116666666667,25.96" DelayedCrossGroupLinksState="Fetched" Label="`scalar deleting destructor'" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" UseManualLocation="True" />
-    <Node Id="@14" Category="CodeSchema_Method" Bounds="-130.73,-6.94000000000006,80.1933333333333,25.96" DelayedCrossGroupLinksState="Fetched" Label="~CActor" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" UseManualLocation="True" />
-    <Node Id="@15" Category="CodeSchema_Method" Bounds="-178.691666666667,160.94,107.36,25.96" DelayedCrossGroupLinksState="Fetched" Label="GetController" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" UseManualLocation="True" />
-    <Node Id="@16" Category="CodeSchema_Method" Bounds="-52.2750000000001,104.98,104.45,25.9600000000001" DelayedCrossGroupLinksState="Fetched" Label="GetInventory" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" UseManualLocation="True" />
-    <Node Id="@17" Category="CodeSchema_Method" Bounds="25.2749999999999,49.02,79.4866666666667,25.96" DelayedCrossGroupLinksState="Fetched" Label="Initialize" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" UseManualLocation="True" />
-    <Node Id="@18" Category="CodeSchema_Method" Bounds="132.941666666667,-6.94000000000006,69.78,25.96" DelayedCrossGroupLinksState="Fetched" Label="Revive" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" UseManualLocation="True" />
-    <Node Id="@2" Category="CodeSchema_Assembly" Bounds="-151.150474719999,-123.00001879478,379.017616106667,310.0000000896" DelayedChildNodesState="Incomplete" DelayedCrossGroupLinksState="Fetched" FilePath="$(c2041091-8e76-3ee1-8c7c-b3cb6c57b43c.OutputPath)" Group="Expanded" Label="Game.dll" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}">
+    <Node Id="@10" Category="CodeSchema_Class" Bounds="-6.017499999999,122.00000625002,118.303333333333,25" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Icon="CodeSchema_Class" Label="CInventory" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" NativeProvider_CodeItemIds="Microsoft.VisualStudio.Progression.SmallList`1[System.Int64]" NativeProvider_TypeName="CInventory" />
+    <Node Id="@11" Category="CodeSchema_Class" Bounds="-186.749166666666,12.0000062500198,163.223333333333,25" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Icon="CodeSchema_Class" Label="CPlayerComponent" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" NativeProvider_CodeItemIds="Microsoft.VisualStudio.Progression.SmallList`1[System.Int64]" NativeProvider_IsSealed="True" NativeProvider_TypeName="CPlayerComponent" />
+    <Node Id="@12" Category="CodeSchema_Method" Bounds="27.4249999999999,-6.94000000000006,74.8133333333333,25.96" DelayedCrossGroupLinksState="Fetched" Label="Update" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" UseManualLocation="True" />
+    <Node Id="@13" Category="CodeSchema_Method" Bounds="115.391666666667,-62.9000000000001,104.88,25.96" DelayedCrossGroupLinksState="Fetched" Label="ProcessEvent" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" UseManualLocation="True" />
+    <Node Id="@14" Category="CodeSchema_Method" Bounds="-178.691666666667,-62.9000000000001,176.116666666667,25.96" DelayedCrossGroupLinksState="Fetched" Label="`scalar deleting destructor'" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" UseManualLocation="True" />
+    <Node Id="@15" Category="CodeSchema_Method" Bounds="-130.73,-6.94000000000006,80.1933333333333,25.96" DelayedCrossGroupLinksState="Fetched" Label="~CActor" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" UseManualLocation="True" />
+    <Node Id="@16" Category="CodeSchema_Method" Bounds="82.1749999999999,104.98,106.81,25.9600000000001" DelayedCrossGroupLinksState="Fetched" Label="GetAttributes" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" UseManualLocation="True" />
+    <Node Id="@17" Category="CodeSchema_Method" Bounds="-178.691666666667,160.94,107.36,25.96" DelayedCrossGroupLinksState="Fetched" Label="GetController" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" UseManualLocation="True" />
+    <Node Id="@18" Category="CodeSchema_Method" Bounds="-52.2750000000001,104.98,104.45,25.9600000000001" DelayedCrossGroupLinksState="Fetched" Label="GetInventory" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" UseManualLocation="True" />
+    <Node Id="@19" Category="CodeSchema_Method" Bounds="25.2749999999999,49.02,79.4866666666667,25.96" DelayedCrossGroupLinksState="Fetched" Label="Initialize" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" UseManualLocation="True" />
+    <Node Id="@2" Category="CodeSchema_Assembly" Bounds="-226.749166666666,-122.99999374998,530.215,310" DelayedChildNodesState="Incomplete" DelayedCrossGroupLinksState="Fetched" FilePath="$(c2041091-8e76-3ee1-8c7c-b3cb6c57b43c.OutputPath)" Group="Expanded" Label="Game.dll" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}">
       <Category Ref="FileSystem.Category.FileOfType.dll" />
     </Node>
-    <Node Id="@4" Category="CodeSchema_Namespace" Bounds="-131.150474719999,-83.0000187819802,339.017616106667,250.000000064" DelayedChildNodesState="Incomplete" DelayedCrossGroupLinksState="Fetched" Group="Expanded" Label="‎::" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" />
-    <Node Id="@6" Category="CodeSchema_Class" Bounds="80.2200719466672,-43.0000187691802,96.9833333333334,25" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="Fetched" DelayedCrossGroupLinksState="Fetched" FetchedChildrenCount="15" Group="Collapsed" Icon="CodeSchema_Class" Label="CActor" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" NativeProvider_CodeItemIds="Microsoft.VisualStudio.Progression.SmallList`1[System.Int64]" NativeProvider_TypeName="CActor" />
-    <Node Id="@7" Category="CodeSchema_Class" Bounds="-111.150474719999,11.9999812436199,149.766666666667,25" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Icon="CodeSchema_Class" Label="CActorController" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" NativeProvider_CodeItemIds="Microsoft.VisualStudio.Progression.SmallList`1[System.Int64]" NativeProvider_TypeName="CActorController" />
-    <Node Id="@8" Category="CodeSchema_Class" Bounds="-95.6588080533327,66.9999812564199,132.24,25" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Icon="CodeSchema_Class" Label="CGamePlugin" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" NativeProvider_CodeItemIds="Microsoft.VisualStudio.Progression.SmallList`1[System.Int64]" NativeProvider_TypeName="CGamePlugin" />
-    <Node Id="@9" Category="CodeSchema_Class" Bounds="69.5639122842681,11.9945440096973,118.303333333333,25" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Icon="CodeSchema_Class" Label="CInventory" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" NativeProvider_CodeItemIds="Microsoft.VisualStudio.Progression.SmallList`1[System.Int64]" NativeProvider_TypeName="CInventory" />
-    <Node Id="Project{A2CFAB57-D50D-30FE-BE75-B12DE229BD9F}" Category="CodeMap_SolutionFolder" Bounds="-171.150474719999,-163.00001880758,419.017616106667,370.0000001152" Group="Expanded" Label="Project" />
+    <Node Id="@20" Category="CodeSchema_Method" Bounds="132.941666666667,-6.94000000000006,69.78,25.96" DelayedCrossGroupLinksState="Fetched" Label="Revive" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" UseManualLocation="True" />
+    <Node Id="@4" Category="CodeSchema_Namespace" Bounds="-206.749166666666,-82.9999937499802,490.215,250" DelayedChildNodesState="Incomplete" DelayedCrossGroupLinksState="Fetched" Group="Expanded" Label="‎::" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" />
+    <Node Id="@6" Category="CodeSchema_Class" Bounds="4.64250000000091,67.0000062500198,96.9833333333334,25" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="Fetched" DelayedCrossGroupLinksState="Fetched" FetchedChildrenCount="15" Group="Collapsed" Icon="CodeSchema_Class" Label="CActor" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" NativeProvider_CodeItemIds="Microsoft.VisualStudio.Progression.SmallList`1[System.Int64]" NativeProvider_TypeName="CActor" />
+    <Node Id="@7" Category="CodeSchema_Class" Bounds="-186.749166666666,122.00000625002,149.766666666667,25" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Icon="CodeSchema_Class" Label="CActorController" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" NativeProvider_CodeItemIds="Microsoft.VisualStudio.Progression.SmallList`1[System.Int64]" NativeProvider_TypeName="CActorController" />
+    <Node Id="@8" Category="CodeSchema_Class" Bounds="142.802500000001,122.00000625002,120.663333333333,25" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Icon="CodeSchema_Class" Label="CAttributes" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" NativeProvider_CodeItemIds="Microsoft.VisualStudio.Progression.SmallList`1[System.Int64]" NativeProvider_TypeName="CAttributes" />
+    <Node Id="@9" Category="CodeSchema_Class" Bounds="-171.257499999999,-42.9999937499802,132.24,25" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Icon="CodeSchema_Class" Label="CGamePlugin" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" NativeProvider_CodeItemIds="Microsoft.VisualStudio.Progression.SmallList`1[System.Int64]" NativeProvider_TypeName="CGamePlugin" />
+    <Node Id="Project{A2CFAB57-D50D-30FE-BE75-B12DE229BD9F}" Category="CodeMap_SolutionFolder" Bounds="-246.749166666666,-162.99999374998,570.215,370" Group="Expanded" Label="Project" />
   </Nodes>
   <Links>
-    <Link Source="@12" Target="@11" Category="CodeSchema_Calls" Bounds="96.6308670043945,-36.939998626709,47.3098068237305,25.7034606933594" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" Weight="1" />
-    <Link Source="@12" Target="@18" Category="CodeSchema_Calls" Bounds="167.831665039063,-36.939998626709,0,20.9999990463257" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" Weight="1" />
-    <Link Source="@13" Target="@14" Category="CodeSchema_Calls" Bounds="-90.6333312988281,-36.939998626709,0,20.9999990463257" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" Weight="1" />
-    <Link Source="@15" Target="@7" Category="References" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" Weight="1" />
-    <Link Source="@16" Target="@9" Category="References" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" Weight="1" />
+    <Link Source="@13" Target="@12" Category="CodeSchema_Calls" Bounds="96.6308670043945,-36.939998626709,47.3098068237305,25.7034606933594" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" Weight="1" />
+    <Link Source="@13" Target="@20" Category="CodeSchema_Calls" Bounds="167.831665039063,-36.939998626709,0,20.9999990463257" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" Weight="1" />
+    <Link Source="@14" Target="@15" Category="CodeSchema_Calls" Bounds="-90.6333312988281,-36.939998626709,0,20.9999990463257" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" Weight="1" />
+    <Link Source="@16" Target="@8" Category="References" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" Weight="1" />
     <Link Source="@17" Target="@7" Category="References" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" Weight="1" />
+    <Link Source="@18" Target="@10" Category="References" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" Weight="1" />
+    <Link Source="@19" Target="@7" Category="References" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" Weight="1" />
     <Link Source="@2" Target="@4" Category="Contains" FetchingParent="@2" />
     <Link Source="@4" Target="@10" Category="Contains" FetchingParent="@4" />
+    <Link Source="@4" Target="@11" Category="Contains" FetchingParent="@4" />
     <Link Source="@4" Target="@6" Category="Contains" FetchingParent="@4" />
     <Link Source="@4" Target="@7" Category="Contains" FetchingParent="@4" />
     <Link Source="@4" Target="@8" Category="Contains" FetchingParent="@4" />
@@ -44,10 +47,9 @@
     <Link Source="@6" Target="(@1 @3 @5 Member=(Name=CActor OverloadingParameters=[(Type=&quot;CActor const &amp;&quot;)]))" Category="Contains" FetchingParent="@6" />
     <Link Source="@6" Target="(@1 @3 @5 Member=(Name=ReflectType OverloadingParameters=[(Type=&quot;Schematyc::CTypeDesc&lt;CActor,void&gt; &amp;&quot;)]))" Category="Contains" FetchingParent="@6" />
     <Link Source="@6" Target="(@1 @3 @5 Member=CActor)" Category="Contains" FetchingParent="@6" />
-    <Link Source="@6" Target="(@1 @3 @5 Member=GetAttributes)" Category="Contains" FetchingParent="@6" />
     <Link Source="@6" Target="(@1 @3 @5 Member=GetEventMask)" Category="Contains" FetchingParent="@6" />
     <Link Source="@6" Target="(@1 @3 @5 Member=GetFactionComponent)" Category="Contains" FetchingParent="@6" />
-    <Link Source="@6" Target="@11" Category="Contains" FetchingParent="@6" />
+    <Link Source="@6" Target="@10" Category="References" IsSourceVirtualized="True" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" Weight="1" />
     <Link Source="@6" Target="@12" Category="Contains" FetchingParent="@6" />
     <Link Source="@6" Target="@13" Category="Contains" FetchingParent="@6" />
     <Link Source="@6" Target="@14" Category="Contains" FetchingParent="@6" />
@@ -55,9 +57,11 @@
     <Link Source="@6" Target="@16" Category="Contains" FetchingParent="@6" />
     <Link Source="@6" Target="@17" Category="Contains" FetchingParent="@6" />
     <Link Source="@6" Target="@18" Category="Contains" FetchingParent="@6" />
+    <Link Source="@6" Target="@19" Category="Contains" FetchingParent="@6" />
+    <Link Source="@6" Target="@20" Category="Contains" FetchingParent="@6" />
     <Link Source="@6" Target="@7" Category="References" IsSourceVirtualized="True" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" Weight="1" />
-    <Link Source="@6" Target="@9" Category="References" IsSourceVirtualized="True" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" Weight="1" />
-    <Link Source="@8" Target="@10" Category="References" Bounds="-29.544017791748,91.9999847412109,0,21" IsSourceVirtualized="True" IsTargetVirtualized="True" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" Weight="6">
+    <Link Source="@6" Target="@8" Category="References" IsSourceVirtualized="True" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" Weight="1" />
+    <Link Source="@9" Target="@11" Category="References" Bounds="-105.137496948242,-17.9999942779541,0,21.0000004768372" IsSourceVirtualized="True" IsTargetVirtualized="True" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" Weight="6">
       <Category Ref="CodeSchema_Calls" />
     </Link>
     <Link Source="Project{A2CFAB57-D50D-30FE-BE75-B12DE229BD9F}" Target="@2" Category="Contains" FetchingParent="Project{A2CFAB57-D50D-30FE-BE75-B12DE229BD9F}" />
@@ -130,17 +134,19 @@
     <Alias n="5" Id="Type=CActor" />
     <Alias n="6" Id="(@1 @3 @5)" />
     <Alias n="7" Id="(@1 @3 Type=CActorController)" />
-    <Alias n="8" Id="(@1 @3 Type=CGamePlugin)" />
-    <Alias n="9" Id="(@1 @3 Type=CInventory)" />
-    <Alias n="10" Id="(@1 @3 Type=CPlayerComponent)" />
-    <Alias n="11" Id="(@1 @3 @5 Member=(Name=Update OverloadingParameters=[(Type=float)]))" />
-    <Alias n="12" Id="(@1 @3 @5 Member=(Name=ProcessEvent OverloadingParameters=[(Type=&quot;SEntityEvent const &amp;&quot;)]))" />
-    <Alias n="13" Id="(@1 @3 @5 Member=(Name=&quot;`scalar deleting destructor'&quot; OverloadingParameters=[(Type=&quot;unsigned int&quot;)]))" />
-    <Alias n="14" Id="(@1 @3 @5 Member=~CActor)" />
-    <Alias n="15" Id="(@1 @3 @5 Member=GetController)" />
-    <Alias n="16" Id="(@1 @3 @5 Member=GetInventory)" />
-    <Alias n="17" Id="(@1 @3 @5 Member=Initialize)" />
-    <Alias n="18" Id="(@1 @3 @5 Member=Revive)" />
+    <Alias n="8" Id="(@1 @3 Type=CAttributes)" />
+    <Alias n="9" Id="(@1 @3 Type=CGamePlugin)" />
+    <Alias n="10" Id="(@1 @3 Type=CInventory)" />
+    <Alias n="11" Id="(@1 @3 Type=CPlayerComponent)" />
+    <Alias n="12" Id="(@1 @3 @5 Member=(Name=Update OverloadingParameters=[(Type=float)]))" />
+    <Alias n="13" Id="(@1 @3 @5 Member=(Name=ProcessEvent OverloadingParameters=[(Type=&quot;SEntityEvent const &amp;&quot;)]))" />
+    <Alias n="14" Id="(@1 @3 @5 Member=(Name=&quot;`scalar deleting destructor'&quot; OverloadingParameters=[(Type=&quot;unsigned int&quot;)]))" />
+    <Alias n="15" Id="(@1 @3 @5 Member=~CActor)" />
+    <Alias n="16" Id="(@1 @3 @5 Member=GetAttributes)" />
+    <Alias n="17" Id="(@1 @3 @5 Member=GetController)" />
+    <Alias n="18" Id="(@1 @3 @5 Member=GetInventory)" />
+    <Alias n="19" Id="(@1 @3 @5 Member=Initialize)" />
+    <Alias n="20" Id="(@1 @3 @5 Member=Revive)" />
   </IdentifierAliases>
   <Styles>
     <Style TargetType="Node" GroupLabel="Results" ValueLabel="True">

@@ -46,6 +46,7 @@ add_sources("Components_uber.cpp"
 add_sources("AI_uber.cpp"
 	PROJECTS Game
 	SOURCE_GROUP "AI"
+		"AI/AIComponent.h"
 		"AI/BehaviorTree.h"
 	SOURCE_GROUP "AI\\\\Trees"
 		"AI/Trees/ITree.h"

@@ -1,5 +1,6 @@
 #include "StdAfx.h"
 #include "ActorController.h"
+#include <CryAISystem/IMovementSystem.h>
 
 void CActorController::Initialize()
 {
@@ -8,6 +9,8 @@ void CActorController::Initialize()
 
 	m_pAnimation->SetMannequinAnimationDatabaseFile("Animations/Mannequin/ADB/FirstPerson.adb");
 	m_pAnimation->SetCharacterFile("Objects/Characters/SampleCharacter/thirdperson.cdf");
+
+	
 
 	m_pAnimation->SetControllerDefinitionFile("Animations/Mannequin/ADB/FirstPersonControllerDefinition.xml");
 	m_pAnimation->SetDefaultScopeContextName("FirstPersonCharacter");
