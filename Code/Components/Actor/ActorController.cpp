@@ -51,6 +51,7 @@ void CActorController::Initialize()
 
 	//IEntityBehaviorTreeComponent
 	m_pBehaviorTree = GetEntity()->GetOrCreateComponent<IEntityBehaviorTreeComponent>();
+	m_pBehaviorTree->SetBBKeyValue("TestTree", 1);
 
 	//IEntityCoverUserComponent
 	m_pCoverUser = GetEntity()->GetOrCreateComponent<IEntityCoverUserComponent>();

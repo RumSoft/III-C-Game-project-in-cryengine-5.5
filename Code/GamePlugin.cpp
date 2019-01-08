@@ -14,6 +14,7 @@
 
 // Included only once per DLL module.
 #include <CryCore/Platform/platform_impl.inl>
+#include "AI/Nodes/TestNode.h"
 
 CGamePlugin::~CGamePlugin()
 {
@@ -31,11 +32,22 @@ CGamePlugin::~CGamePlugin()
 	}
 }
 
+#define REGISTER_BEHAVIOR_TREE_NODE2(manager, nodetype)                      \
+  {                                                                         \
+    static NodeCreator<nodetype> nodetype ## NodeCreator( # nodetype);      \
+    manager->GetNodeFactory().RegisterNodeCreator(&nodetype ## NodeCreator);			\
+  }
+
+
 bool CGamePlugin::Initialize(SSystemGlobalEnvironment& env, const SSystemInitParams& initParams)
 {
 	// Register for engine system events, in our case we need ESYSTEM_EVENT_GAME_POST_INIT to load the map
 	gEnv->pSystem->GetISystemEventDispatcher()->RegisterListener(this, "CGamePlugin");
-	
+//#define ExposeBehaviorTreeNodeToFactory(factory, nodetype) factory.RegisterNodeCreator(&NodeCreators##nodetype::nodetype##NodeCreator);
+
+	//BehaviorTree::INodeFactory& factory = gEnv->pAISystem->GetIBehaviorTreeManager()->GetNodeFactory();
+	//ExposeBehaviorTreeNodeToFactory(factory, MyNode);
+	//factory.RegisterNodeCreator(&NodeCreator<MyNode>("MyNodeNodeCreator"));
 	return true;
 }
 
@@ -48,7 +60,8 @@ void CGamePlugin::OnSystemEvent(ESystemEvent event, UINT_PTR wparam, UINT_PTR lp
 		{
 			// Listen for client connection events, in order to create the local player
 			gEnv->pGameFramework->AddNetworkedClientListener(*this);
-
+			auto manager = gEnv->pAISystem->GetIBehaviorTreeManager();
+			REGISTER_BEHAVIOR_TREE_NODE2(manager, MyNode)
 			// Don't need to load the map in editor
 			if (!gEnv->IsEditor())
 			{

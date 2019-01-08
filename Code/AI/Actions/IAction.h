@@ -7,10 +7,6 @@ class IActorAction
 public:
 	virtual ~IActorAction() = default;
 	
-	/**
-	 * \brief xd
-	 * \param controller ddd
-	 */
 	virtual void Process(CActorController* controller) = 0;
 };
 

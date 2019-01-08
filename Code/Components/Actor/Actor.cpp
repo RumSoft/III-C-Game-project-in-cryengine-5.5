@@ -28,10 +28,16 @@ void CActor::ProcessEvent(const SEntityEvent& event)
 }
 
 
+CActor::~CActor()
+{
+	delete _healthAttribute;
+}
+
 void CActor::Initialize()
 {
 	Logger::Get().Log(GetEntity()->GetName(), "initialized");
 	m_pActorController = GetEntity()->GetOrCreateComponentClass<CActorController>();
+	_healthAttribute = new CAttribute(100.f, 10.f, 2.f);
 }
 
 
@@ -45,15 +51,17 @@ void CActor::Revive()
 void CActor::Update(float fFrameTime)
 {
 	gEnv->pAuxGeomRenderer->DrawSphere(GetEntity()->GetWorldPos(), 0.25f, ColorF(1, 1, 0, .5));
+	
+	_healthAttribute->Update(fFrameTime);
+	_healthAttribute->SetAttributeEmptyCallback([this]()
+	{
+		Logger::Get().Log(GetEntity()->GetName(), "killed");
+	});
 	slowupdate += fFrameTime;
 	if(slowupdate >= 5)
 	{
 		slowupdate = 0;
-		ActorAction* x = nullptr;
 
-		x = new HideInCoverAction();
-		x->Process(GetController());
-		delete x;
 		//GetController()->GetNavigationComponent()->NavigateTo(GetEntity()->GetWorldPos() + Vec3(4, 4, 0));
 		//GetController()->GetPathfindingComponent()->RequestMoveTo(GetEntity()->GetWorldPos() + Vec3(4, 4, 0));
 	}

@@ -10,7 +10,7 @@ class CActor : public IActor
 #pragma region base
 public:
 	// Provide a virtual destructor, ensuring correct destruction of IEntityComponent members
-	virtual ~CActor() = default;
+	virtual ~CActor();
 	void Initialize() override;
 	virtual uint64 GetEventMask() const override;
 	virtual void ProcessEvent(const SEntityEvent& event) override;
@@ -33,14 +33,16 @@ public:
 
 	CActorController*	GetController() { return m_pActorController; }
 	CInventory*			GetInventory()	{ return m_pInventory; }
-	CAttributes*		GetAttributes() { return m_pAttributes; }
 	IEntityFactionComponent* GetFactionComponent() { return m_pFactionComponent; }
 
+	float GetHealth() { return _healthAttribute->GetValue(); }
+	void DamageActor(const float value) { _healthAttribute->ChangeValue(-value, true); }
 private:
 	CActorController*	m_pActorController = nullptr;
 	CInventory*			m_pInventory = nullptr; //equipment: weapon,armour,skills? and consumables
-	CAttributes*		m_pAttributes = nullptr; //health, mana, some other effects
 	IEntityFactionComponent* m_pFactionComponent = nullptr;
 	float slowupdate = 0;
+
+	CAttribute* _healthAttribute = nullptr;
 };
 
