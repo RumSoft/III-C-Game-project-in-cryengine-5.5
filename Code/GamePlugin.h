@@ -80,3 +80,4 @@ static void registerComponent(Schematyc::IEnvRegistrar& registrar)
 #define CInventoryGUID "{620546B7-7A34-4472-AFE8-65BB8223B55D}"_cry_guid
 #define CAttributesGUID "{6D1B110E-5F79-4E34-AE7B-9B4762561410}"_cry_guid
 #define CItemGuid "{33DAABF8-7BD2-4DFE-A338-BF298585B8B1}"_cry_guid
+#define CCameraManagerGUID "{9DB97454-C11B-445F-83D1-166B1E059075}"_cry_guid
