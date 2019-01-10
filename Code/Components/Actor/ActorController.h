@@ -29,6 +29,7 @@ public:
 		desc.SetIcon("icons:ObjectTypes/light.ico");
 		desc.SetComponentFlags({ EFlags::Transform });
 	}
+#pragma endregion
 
 public:
 	CAdvancedAnimationComponent*	GetAnimationComponent()		{ return m_pAnimation; }
@@ -52,6 +53,5 @@ private:
 	FragmentID m_activeFragmentId;
 	float m_movementSpeed = 5.f;
 
-#pragma endregion
 
 };

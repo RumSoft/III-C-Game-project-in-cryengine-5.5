@@ -32,8 +32,6 @@ void CActorController::Initialize()
 	//CCharacterControllerComponent
 	m_pCharacterController->SetTransformMatrix(Matrix34::Create(Vec3(1.f), IDENTITY, Vec3(0, 0, 1.f)));
 
-	//CPathfindingComponent
-	//m_pPathfindingComponent->SetMaxAcceleration(m_movementSpeed);
 	m_pPathfindingComponent->SetMovementRecommendationCallback([this](const Vec3& recommendedVelocity)	{
 		m_pCharacterController->ChangeVelocity(recommendedVelocity,
 		                                       CCharacterControllerComponent::EChangeVelocityMode::SetAsTarget);
