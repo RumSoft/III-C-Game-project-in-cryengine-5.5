@@ -42,7 +42,7 @@ add_sources("Components_uber.cpp"
 		"Components/AI/AIEnemy.h"
 		"Components/AI/AIComponent.h"
 		"Components/AI/BehaviorTree.h"
-	SOURCE_GROUP "AI\\\\Trees"
+	SOURCE_GROUP "Components\\\\AI\\\\Trees"
 		"Components/AI/Trees/ITree.h"
 
 	SOURCE_GROUP "Components\\\\Actor\\\\Actions"

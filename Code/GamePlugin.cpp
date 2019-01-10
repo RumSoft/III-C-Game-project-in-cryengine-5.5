@@ -14,7 +14,7 @@
 
 // Included only once per DLL module.
 #include <CryCore/Platform/platform_impl.inl>
-#include "AI/Nodes/TestNode.h"
+#include "Components/AI/Nodes/TestNode.h"
 
 CGamePlugin::~CGamePlugin()
 {
