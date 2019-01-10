@@ -52,7 +52,8 @@ void CPlayerComponent::Initialize()
 
 uint64 CPlayerComponent::GetEventMask() const
 {
-	return ENTITY_EVENT_BIT(ENTITY_EVENT_START_GAME) | ENTITY_EVENT_BIT(ENTITY_EVENT_UPDATE);
+	return ENTITY_EVENT_BIT(ENTITY_EVENT_START_GAME) 
+	| ENTITY_EVENT_BIT(ENTITY_EVENT_UPDATE);
 }
 
 void CPlayerComponent::Update(float fFrameTime)

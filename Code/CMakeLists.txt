@@ -69,6 +69,11 @@ add_sources("Player_uber.cpp"
     SOURCE_GROUP "Components\\\\Player"
 		"Components/Player/Player.cpp"
 		"Components/Player/Player.h"
+	SOURCE_GROUP "Components\\\\Player\\\\Camera"
+		"Components/Player/Camera/CameraManager.h"
+		"Components/Player/Camera/ICameraMode.h"
+	SOURCE_GROUP "Components\\\\Player\\\\Input"
+		"Components/Player/Input/Input.h"
 )
 add_sources("Console_uber.cpp"
     PROJECTS Game
