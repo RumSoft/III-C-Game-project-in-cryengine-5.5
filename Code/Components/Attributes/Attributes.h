@@ -3,6 +3,7 @@
 #include <functional>
 
 //CAttribute
+//callback pattern from 
 //https://gist.github.com/4poc/3155832
 
 class CAttribute
