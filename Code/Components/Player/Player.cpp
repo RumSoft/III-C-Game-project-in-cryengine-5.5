@@ -15,6 +15,8 @@ void CPlayerComponent::Initialize()
 	// Get the input component, wraps access to action mapping so we can easily get callbacks when inputs are triggered
 	m_pInputComponent = m_pEntity->GetOrCreateComponent<Cry::DefaultComponents::CInputComponent>();
 
+	m_pActor = GetEntity()->GetOrCreateComponent<CActor>();
+
 	// Register an action, and the callback that will be sent when it's triggered
 	m_pInputComponent->RegisterAction("player", "moveleft", [this](int activationMode, float value) { HandleInputFlagChange((TInputFlags)EInputFlag::MoveLeft, activationMode);  });
 	// Bind the 'A' key the "moveleft" action
@@ -155,6 +157,8 @@ void CPlayerComponent::Revive()
 
 		m_pEntity->SetWorldTM(Matrix34::Create(playerScale, playerRotation, playerPosition));
 	}
+
+
 
 	// Unhide the entity in case hidden by the Editor
 	GetEntity()->Hide(false);

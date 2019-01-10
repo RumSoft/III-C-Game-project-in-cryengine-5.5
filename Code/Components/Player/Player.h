@@ -7,6 +7,7 @@
 
 #include <DefaultComponents/Cameras/CameraComponent.h>
 #include <DefaultComponents/Input/InputComponent.h>
+#include "Components/Actor/Actor.h"
 
 class CGamePlugin;
 
@@ -57,8 +58,9 @@ protected:
 	void HandleInputFlagChange(TInputFlags flags, int activationMode, EInputFlagType type = EInputFlagType::Hold);
 
 private:
-	Cry::DefaultComponents::CCameraComponent* m_pCameraComponent = nullptr;
-	Cry::DefaultComponents::CInputComponent* m_pInputComponent = nullptr;
+	CCameraComponent* m_pCameraComponent = nullptr;
+	CInputComponent* m_pInputComponent = nullptr;
+	CActor* m_pActor = nullptr;
 
 	bool aimingMode;
 	TInputFlags m_inputFlags;
