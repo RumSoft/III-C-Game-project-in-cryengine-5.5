@@ -15,7 +15,7 @@ class CActorController : public IEntityComponent
 #pragma region base
 public:
 	CActorController() = default;
-	virtual ~CActorController() = default;
+	virtual ~CActorController();
 
 	friend CGamePlugin;
 	void Initialize() override;
@@ -34,17 +34,17 @@ public:
 	CAdvancedAnimationComponent*	GetAnimationComponent()		{ return m_pAnimation; }
 	CCharacterControllerComponent*	GetCharacterController()	{ return m_pCharacterController; }
 	CPathfindingComponent*			GetPathfindingComponent()	{ return m_pPathfindingComponent; }
-	IEntityBehaviorTreeComponent*	GetBehaviorTreeComponent()	{ return m_pBehaviorTree; }
+	//IEntityBehaviorTreeComponent*	GetBehaviorTreeComponent()	{ return m_pBehaviorTree; }
 	IEntityNavigationComponent*		GetNavigationComponent()	{ return m_pNavigation; }
-	IEntityCoverUserComponent*		GetCoverUserComponent()		{ return m_pCoverUser; }
+	//IEntityCoverUserComponent*		GetCoverUserComponent()		{ return m_pCoverUser; }
 
 private:
 	CAdvancedAnimationComponent*	m_pAnimation			= nullptr;
 	CCharacterControllerComponent*	m_pCharacterController	= nullptr;
 	CPathfindingComponent*			m_pPathfindingComponent	= nullptr;
-	IEntityBehaviorTreeComponent*	m_pBehaviorTree			= nullptr;
+	//IEntityBehaviorTreeComponent*	m_pBehaviorTree			= nullptr;
 	IEntityNavigationComponent*		m_pNavigation			= nullptr;
-	IEntityCoverUserComponent*		m_pCoverUser			= nullptr;
+	//IEntityCoverUserComponent*		m_pCoverUser			= nullptr;
 
 	FragmentID m_idleFragmentId;
 	FragmentID m_walkFragmentId;
