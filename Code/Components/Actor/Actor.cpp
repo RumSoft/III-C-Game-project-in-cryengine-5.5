@@ -1,7 +1,7 @@
 #include "StdAfx.h"
 #include "Actor.h"
 #include <CryMath/Random.h>
-#include "Components/AI/Actions/IAction.h"
+#include "Components/Actor/Actions/IAction.h"
 
 
 uint64 CActor::GetEventMask() const
