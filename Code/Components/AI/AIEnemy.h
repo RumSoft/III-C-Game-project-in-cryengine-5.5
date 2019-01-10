@@ -2,14 +2,12 @@
 #include <CryEntitySystem/IEntityComponent.h>
 #include "GamePlugin.h"
 #include "AIComponent.h"
-#include "Components/Actor/Actor.h"
-
 class CAIEnemy : public CAIComponent
 {
 #pragma region base
 public:
 	CAIEnemy() = default;
-	virtual ~CAIEnemy();
+	virtual ~CAIEnemy() = default;
 
 	friend CGamePlugin;
 	void Initialize() override;

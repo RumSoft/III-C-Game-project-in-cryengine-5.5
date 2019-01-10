@@ -26,7 +26,6 @@ add_sources("Components_uber.cpp"
     SOURCE_GROUP "Components\\\\Player"
 		"Components/Player/Player.cpp"
 		"Components/Player/Player.h"
-
 	SOURCE_GROUP "Components\\\\Actor"
 		"Components/Actor/Actor.cpp"
 		"Components/Actor/Actor.h"
@@ -34,7 +33,6 @@ add_sources("Components_uber.cpp"
 		"Components/Actor/ActorController.h"
 		"Components/Actor/IActor.cpp"
 		"Components/Actor/IActor.h"
-
 	SOURCE_GROUP "Components\\\\AI"
 		"Components/AI/AIComponent.cpp"
 		"Components/AI/AIComponent.h"
@@ -44,16 +42,12 @@ add_sources("Components_uber.cpp"
 		"Components/AI/BehaviorTree.h"
 	SOURCE_GROUP "Components\\\\AI\\\\Trees"
 		"Components/AI/Trees/ITree.h"
-
 	SOURCE_GROUP "Components\\\\Actor\\\\Actions"
 		"Components/Actor/Actions/IAction.h"
-
 	SOURCE_GROUP "Components\\\\Actor\\\\State"
 		"Components/Actor/State/IActorState.h"
-
 	SOURCE_GROUP "Components\\\\Inventory"
 		"Components/Inventory/Inventory.h"
-
 	SOURCE_GROUP "Components\\\\Attributes"
 		"Components/Attributes/Attributes.h"
 )

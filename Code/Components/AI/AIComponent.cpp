@@ -1,6 +1,10 @@
 #include "StdAfx.h"
 #include "AIComponent.h"
 
+CAIComponent::~CAIComponent()
+{
+}
+
 void CAIComponent::Initialize()
 {
 	m_pActor = GetEntity()->GetOrCreateComponent<CActor>();
