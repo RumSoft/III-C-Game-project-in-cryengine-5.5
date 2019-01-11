@@ -32,6 +32,9 @@ public:
 #pragma endregion
 
 public:
+
+	void Revive();
+
 	CAdvancedAnimationComponent*	GetAnimationComponent()		{ return m_pAnimation; }
 	CCharacterControllerComponent*	GetCharacterController()	{ return m_pCharacterController; }
 	CPathfindingComponent*			GetPathfindingComponent()	{ return m_pPathfindingComponent; }
@@ -52,6 +55,10 @@ private:
 	TagID m_rotateTagId; 
 	FragmentID m_activeFragmentId;
 	float m_movementSpeed = 5.f;
+
+private:
+	void UpdateAnimation(float fFrameTime);
+	void Update(float fFrameTime);
 
 
 };

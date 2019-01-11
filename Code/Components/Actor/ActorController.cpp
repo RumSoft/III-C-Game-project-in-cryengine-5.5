@@ -55,14 +55,64 @@ void CActorController::Initialize()
 
 uint64 CActorController::GetEventMask() const
 {
-	return ENTITY_EVENT_BIT(ENTITY_EVENT_START_GAME) 
-	| ENTITY_EVENT_BIT(ENTITY_EVENT_UPDATE) 
-	| ENTITY_EVENT_BIT(ENTITY_EVENT_RESET);
+	return ENTITY_EVENT_BIT(ENTITY_EVENT_START_GAME)
+		| ENTITY_EVENT_BIT(ENTITY_EVENT_UPDATE)
+		| ENTITY_EVENT_BIT(ENTITY_EVENT_RESET)
+		| ENTITY_EVENT_BIT(Cry::Entity::EEvent::TransformChangeFinishedInEditor);
 }
 
 void CActorController::ProcessEvent(const SEntityEvent& event)
 {
+	switch(event.event)
+	{
+	case ENTITY_EVENT_START_GAME:
+	case ENTITY_EVENT_RESET:
+	case Cry::Entity::EEvent::TransformChangeFinishedInEditor:
+		Revive();
+		break;
+	case ENTITY_EVENT_UPDATE:
+		SEntityUpdateContext* pCtx = (SEntityUpdateContext*)event.nParam[0];
+		Update(pCtx->fFrameTime);
+		break;
+	}
+}
 
+void CActorController::Update(float fFrameTime)
+{
+	UpdateAnimation(fFrameTime);
+}
+
+void CActorController::UpdateAnimation(float fFrameTime)
+{
+
+	// Update active fragment
+	const auto& desiredFragmentId = m_pCharacterController->IsWalking() ? m_walkFragmentId : m_idleFragmentId;
+	if (m_activeFragmentId != desiredFragmentId)
+	{
+		m_activeFragmentId = desiredFragmentId;
+		m_pAnimation->QueueFragmentWithId(m_activeFragmentId);
+	}
+
+
+	//// Send updated transform to the entity, only orientation changes
+	//GetEntity()->SetPosRotScale(GetEntity()->GetWorldPos(), 
+	//	GetEntity()->GetWorldRotation(), 
+	//	Vec3(1, 1, 1));
+}
+
+
+
+void CActorController::Revive()
+{
+	Snackbar::Get().Log(GetEntity()->GetName());
+	GetEntity()->Hide(false);
+	GetEntity()->SetWorldTM(Matrix34::Create(Vec3(1, 1, 1), IDENTITY, GetEntity()->GetWorldPos()));
+
+	m_pCharacterController->SetTransformMatrix(Matrix34::Create(Vec3(1.f), IDENTITY, Vec3(0, 0, 1.f)));
+	m_pCharacterController->SetVelocity(ZERO);
+	m_pCharacterController->Physicalize();
+	m_pAnimation->ResetCharacter();
+	
 }
 
 CRY_STATIC_AUTO_REGISTER_FUNCTION(&registerComponent<CActorController>)

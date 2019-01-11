@@ -10,6 +10,7 @@ class ICameraMode
 public:
 	virtual ~ICameraMode() = default;
 	virtual void Update(Matrix34 playerTM) = 0;
+	virtual void UpdateZoom(float change);
 	virtual void UpdateView(Matrix34 playerTM);
 	virtual void OnActivate() = 0;
 	virtual void OnDeactivate() = 0;
@@ -18,11 +19,17 @@ public:
 
 protected:
 	bool IsZoomEnabled = true;
+	bool IsCursorEnabled = false;
 	float m_zoomDistance = 10;
 	float m_fov = 65;
 	Matrix34 m_cameraMatrix{ ZERO, IDENTITY };
 	CCamera m_camera;
 };
+
+inline void ICameraMode::UpdateZoom(const float change)
+{
+	m_zoomDistance += change;
+}
 
 inline void ICameraMode::UpdateView(Matrix34 playerTM)
 {

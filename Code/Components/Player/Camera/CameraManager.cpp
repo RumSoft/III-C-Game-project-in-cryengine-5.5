@@ -63,8 +63,7 @@ void CCameraManager::SetCameraMode(ECameraMode mode)
 
 void CCameraManager::Update(float fFrameTime)
 {
-	Logger::Get().Log("CameraPos", Vec3ToString(GetEntity()->GetPos()));
-	Logger::Get().Log("CameraMode", GetCameraModeType()==0 ? "topdown" : "inventory");
+	GetCameraMode()->UpdateZoom(m_zoomDelta);
 	GetCameraMode()->UpdateView(GetEntity()->GetWorldTM());
 	m_zoomDelta = 0;
 }
