@@ -11,41 +11,15 @@
 void CPlayerComponent::Initialize()
 {
 	// Create the camera component, will automatically update the viewport every frame
-	m_pCameraComponent = m_pEntity->GetOrCreateComponent<Cry::DefaultComponents::CCameraComponent>();
+	m_pCameraManager = GetEntity()->GetOrCreateComponent<CCameraManager>();
 	// Get the input component, wraps access to action mapping so we can easily get callbacks when inputs are triggered
 	m_pInputComponent = m_pEntity->GetOrCreateComponent<Cry::DefaultComponents::CInputComponent>();
 
 	m_pActor = GetEntity()->GetOrCreateComponent<CActor>();
 
 	// Register an action, and the callback that will be sent when it's triggered
-	m_pInputComponent->RegisterAction("player", "moveleft", [this](int activationMode, float value) { HandleInputFlagChange((TInputFlags)EInputFlag::MoveLeft, activationMode);  });
-	// Bind the 'A' key the "moveleft" action
-	m_pInputComponent->BindAction("player", "moveleft", eAID_KeyboardMouse, EKeyId::eKI_A);
-
-	m_pInputComponent->RegisterAction("player", "moveright", [this](int activationMode, float value) { HandleInputFlagChange((TInputFlags)EInputFlag::MoveRight, activationMode);  });
-	m_pInputComponent->BindAction("player", "moveright", eAID_KeyboardMouse, EKeyId::eKI_D);
-
-	m_pInputComponent->RegisterAction("player", "moveforward", [this](int activationMode, float value) { HandleInputFlagChange((TInputFlags)EInputFlag::MoveForward, activationMode);  });
-	m_pInputComponent->BindAction("player", "moveforward", eAID_KeyboardMouse, EKeyId::eKI_W);
-
-	m_pInputComponent->RegisterAction("player", "moveback", [this](int activationMode, float value) { HandleInputFlagChange((TInputFlags)EInputFlag::MoveBack, activationMode);  });
-	m_pInputComponent->BindAction("player", "moveback", eAID_KeyboardMouse, EKeyId::eKI_S);
-
-	m_pInputComponent->RegisterAction("player", "mouse_rotateyaw", [this](int activationMode, float value) { m_mouseDeltaRotation.x -= value; });
-	m_pInputComponent->BindAction("player", "mouse_rotateyaw", eAID_KeyboardMouse, EKeyId::eKI_MouseX);
-
-	m_pInputComponent->RegisterAction("player", "mouse_rotatepitch", [this](int activationMode, float value) { m_mouseDeltaRotation.y -= value; });
-	m_pInputComponent->BindAction("player", "mouse_rotatepitch", eAID_KeyboardMouse, EKeyId::eKI_MouseY);
 
 
-	m_pInputComponent->RegisterAction("player", "simulateexplosion", [this](int activationMode, float value) { if (activationMode == eIS_Released) if(aimingMode)CreateExplosion();  });
-	m_pInputComponent->BindAction("player", "simulateexplosion", eAID_KeyboardMouse, EKeyId::eKI_Mouse1);
-
-	m_pInputComponent->RegisterAction("player", "simulatepulse", [this](int activationMode, float value) { if (activationMode == eIS_Released) if(aimingMode)CreatePulse();  });
-	m_pInputComponent->BindAction("player", "simulatepulse", eAID_KeyboardMouse, EKeyId::eKI_Mouse2);
-
-	m_pInputComponent->RegisterAction("player", "toggleeditorattack", [this](int activationMode, float value) { if(activationMode == eIS_Released) aimingMode = !aimingMode; });
-	m_pInputComponent->BindAction("player", "toggleeditorattack", eAID_KeyboardMouse, EKeyId::eKI_Mouse3);
 
 	Revive();
 }

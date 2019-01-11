@@ -8,6 +8,7 @@
 #include <DefaultComponents/Cameras/CameraComponent.h>
 #include <DefaultComponents/Input/InputComponent.h>
 #include "Components/Actor/Actor.h"
+#include "Camera/CameraManager.h"
 
 class CGamePlugin;
 
@@ -58,7 +59,7 @@ protected:
 	void HandleInputFlagChange(TInputFlags flags, int activationMode, EInputFlagType type = EInputFlagType::Hold);
 
 private:
-	CCameraComponent* m_pCameraComponent = nullptr;
+	CCameraManager* m_pCameraManager = nullptr;
 	CInputComponent* m_pInputComponent = nullptr;
 	CActor* m_pActor = nullptr;
 
@@ -66,6 +67,8 @@ private:
 	TInputFlags m_inputFlags;
 	Vec2 m_mouseDeltaRotation;
 	Vec3 aimingPoint;
+
+	bool inventoryMode = false;
 
 	void CreatePulse();
 	void CreateExplosion();

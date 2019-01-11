@@ -18,7 +18,7 @@ class CCameraManager : public IEntityComponent
 
 #pragma region base
 public:
-	CCameraManager() = default;
+	CCameraManager();
 	virtual ~CCameraManager() = default;
 
 	friend CGamePlugin;
@@ -37,13 +37,17 @@ public:
 private:
 
 public:
-	void SetCameraMode(ECameraMode mode, const char* reason){}
+	void Update(float fFrameTime);
+	void SetCameraMode(ECameraMode mode);
 private:
-	Cry::DefaultComponents::CCameraComponent* m_pCameraComponent = nullptr;
-	Cry::DefaultComponents::CInputComponent* m_pInputComponent = nullptr;
+	ECameraMode GetCameraModeType() const { return m_currentMode; }
+	ICameraMode* GetCameraMode() const { return m_cameraModes[m_currentMode]; }
+
+	CCameraComponent* m_pCameraComponent = nullptr;
+	CInputComponent* m_pInputComponent = nullptr;
 
 	ICameraMode* m_cameraModes[eCameraMode_Last];
-	ECameraMode m_cameraMode = eCameraMode_NoCamera;
+	ECameraMode m_currentMode = eCameraMode_NoCamera;
 
 	float m_zoomDelta{ 0.0f };
 };

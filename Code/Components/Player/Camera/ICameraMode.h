@@ -9,7 +9,8 @@ class ICameraMode
 {
 public:
 	virtual ~ICameraMode() = default;
-	virtual void UpdateView() = 0;
+	virtual void Update(Matrix34 playerTM) = 0;
+	virtual void UpdateView(Matrix34 playerTM);
 	virtual void OnActivate() = 0;
 	virtual void OnDeactivate() = 0;
 
@@ -22,3 +23,18 @@ protected:
 	Matrix34 m_cameraMatrix{ ZERO, IDENTITY };
 	CCamera m_camera;
 };
+
+inline void ICameraMode::UpdateView(Matrix34 playerTM)
+{
+	Update(playerTM);
+
+	const CCamera& systemCamera = gEnv->pSystem->GetViewCamera();
+
+	m_camera.SetFrustum(systemCamera.GetViewSurfaceX(), systemCamera.GetViewSurfaceZ(), DEG2RAD(m_fov), 0.25,
+		gEnv->p3DEngine->GetMaxViewDistance(), systemCamera.GetPixelAspectRatio());
+	m_camera.SetMatrix(m_cameraMatrix);
+
+	// Take control of the system camera.
+	// TODO: This is a greedy inconsiderate way to do it. Only do this on activation and release on deactivation for the cameras.
+	gEnv->pSystem->SetViewCamera(m_camera);
+}
