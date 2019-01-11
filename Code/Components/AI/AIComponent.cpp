@@ -40,7 +40,7 @@ void CAIComponent::Update(float fFrameTime)
 		slowupdate = 0;
 
 		//GetController()->GetNavigationComponent()->NavigateTo(GetEntity()->GetWorldPos() + Vec3(4, 4, 0));
-		GetActor()->GetController()->GetPathfindingComponent()->RequestMoveTo(GetEntity()->GetWorldPos() + Vec3(4, 4, 0));
+		GetActor()->GetController()->GetPathfindingComponent()->RequestMoveTo(GetEntity()->GetWorldPos() - Vec3(4, 4, 0));
 	}
 }
 
