@@ -32,15 +32,13 @@ void CAIComponent::ProcessEvent(const SEntityEvent& event)
 	}
 }
 
-void CAIComponent::Update(float fFrameTime)
+void CAIComponent::Update(const float fFrameTime)
 {
 	slowupdate += fFrameTime;
 	if (slowupdate >= 5)
 	{
 		slowupdate = 0;
-
-		//GetController()->GetNavigationComponent()->NavigateTo(GetEntity()->GetWorldPos() + Vec3(4, 4, 0));
-		GetActor()->GetController()->GetPathfindingComponent()->RequestMoveTo(GetEntity()->GetWorldPos() - Vec3(4, 4, 0));
+		//GetActor()->QueueAction(new MoveByAction(Vec3(4, -4, 0)));
 	}
 }
 

@@ -4,6 +4,8 @@
 #include "ActorController.h"
 #include "Components/Inventory/Inventory.h"
 #include "Components/Attributes/Attributes.h"
+#include <vector>
+#include "Actions/IAction.h"
 
 class CActor : public IActor
 {
@@ -26,10 +28,13 @@ public:
 
 
 private:
+	void UpdateActions(float fFrameTime);
 	void Update(float fFrameTime) override;
 	void Revive() override;
 
 public:
+	void QueueAction(IActorAction* action) { _actionQueue.push_back(action); }
+	void ClearActionQueue() { _actionQueue.clear(); }
 
 	CActorController*	GetController() { return m_pActorController; }
 	CInventory*			GetInventory()	{ return m_pInventory; }
@@ -41,8 +46,12 @@ private:
 	CActorController*	m_pActorController = nullptr;
 	CInventory*			m_pInventory = nullptr; //equipment: weapon,armour,skills? and consumables
 	IEntityFactionComponent* m_pFactionComponent = nullptr;
-	float slowupdate = 0;
 
 	CAttribute* _healthAttribute = nullptr;
-};
+	std::vector<IActorAction*> _actionQueue;
+
+	float slowupdate = 0;
+};	
+
+
 

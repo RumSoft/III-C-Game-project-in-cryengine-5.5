@@ -41,9 +41,7 @@ public:
 	friend CGamePlugin;
 	// IEntityComponent
 	virtual void Initialize() override;
-
 	virtual uint64 GetEventMask() const override;
-	void Update(float fFrameTime);
 	virtual void ProcessEvent(const SEntityEvent& event) override;
 	// ~IEntityComponent
 
@@ -54,6 +52,10 @@ public:
 	}
 
 	void Revive();
+	void UpdateMouse(float fFrameTime);
+	void Update(float fFrameTime);
+
+	CActor* GetActor() { return m_pActor; }
 
 protected:
 	void HandleInputFlagChange(TInputFlags flags, int activationMode, EInputFlagType type = EInputFlagType::Hold);
@@ -63,10 +65,9 @@ private:
 	CInputComponent* m_pInputComponent = nullptr;
 	CActor* m_pActor = nullptr;
 
-	bool aimingMode;
-	TInputFlags m_inputFlags;
-	Vec2 m_mouseDeltaRotation;
-	Vec3 aimingPoint;
+	Vec2 _mouseScreen = ZERO;
+	Vec3 _mousePos = ZERO;
+	ray_hit _mouseRaycastHit{};
 
 	bool inventoryMode = false;
 

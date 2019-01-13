@@ -50,12 +50,31 @@ void CActor::Revive()
 }
 
 
+void CActor::UpdateActions(const float fFrameTime)
+{
+	if (_actionQueue.size() == 0)
+		return;
+
+	for (auto it = _actionQueue.begin(); it != _actionQueue.end(); /* NOTHING */)
+	{
+		(*it)->Process(this);
+		it = _actionQueue.erase(it);
+	}
+
+}
+
 void CActor::Update(float fFrameTime)
 {
-	gEnv->pAuxGeomRenderer->DrawSphere(GetEntity()->GetWorldPos(), 0.25f, ColorF(1, 1, 0, .5));
-	
+	UpdateActions(fFrameTime);
+
 	_healthAttribute->Update(fFrameTime);
 
+	slowupdate += fFrameTime;
+
+	if (slowupdate >= 5){
+		slowupdate = 0;
+		//GetController()->GetNavigationComponent()->NavigateTo(Vec3(5, 5, 0) + GetEntity()->GetWorldPos());
+	}
 }
 
 CRY_STATIC_AUTO_REGISTER_FUNCTION(&registerComponent<CActor>)

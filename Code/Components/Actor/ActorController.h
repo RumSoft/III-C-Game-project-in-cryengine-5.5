@@ -48,7 +48,7 @@ private:
 	CPathfindingComponent*			m_pPathfindingComponent	= nullptr;
 	//IEntityBehaviorTreeComponent*	m_pBehaviorTree			= nullptr;
 	IEntityNavigationComponent*		m_pNavigation			= nullptr;
-	//IEntityCoverUserComponent*		m_pCoverUser			= nullptr;
+	//IEntityCoverUserComponent*	m_pCoverUser			= nullptr;
 
 	FragmentID m_idleFragmentId;
 	FragmentID m_walkFragmentId;

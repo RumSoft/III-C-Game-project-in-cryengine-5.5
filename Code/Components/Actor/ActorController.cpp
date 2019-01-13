@@ -94,15 +94,11 @@ void CActorController::UpdateAnimation(float fFrameTime)
 	}
 
 
-	//// Send updated transform to the entity, only orientation changes
-	//GetEntity()->SetPosRotScale(GetEntity()->GetWorldPos(), 
-	//	GetEntity()->GetWorldRotation(), 
-	//	Vec3(1, 1, 1));
 	IEntity* target = nullptr;
 	if (target == nullptr) {
 		auto dir = m_pCharacterController->GetMoveDirection();
 		if(m_pCharacterController->IsWalking())
-			GetEntity()->SetRotation(Quat::CreateRotationZ(-atan2(dir.y,dir.x)));
+			GetEntity()->SetRotation(Quat::CreateRotationZ(atan2(-dir.y,dir.x)));
 	}
 }
 
