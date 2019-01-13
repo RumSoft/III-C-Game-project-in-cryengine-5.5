@@ -98,7 +98,7 @@ void CActorController::UpdateAnimation(float fFrameTime)
 	if (target == nullptr) {
 		auto dir = m_pCharacterController->GetMoveDirection();
 		if(m_pCharacterController->IsWalking())
-			GetEntity()->SetRotation(Quat::CreateRotationZ(atan2(-dir.y,dir.x)));
+			GetEntity()->SetRotation(Quat::CreateRotationZ(atan2(-dir.x,dir.y)));
 	}
 }
 
