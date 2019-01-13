@@ -24,25 +24,67 @@ add_sources("Code_uber.cpp"
 add_sources("Components_uber.cpp"
     PROJECTS Game
     SOURCE_GROUP "Components"
-		"Components/Player.cpp"
-		"Components/Player.h"
-	SOURCE_GROUP "Components\\\\Actor"
-		"Components/Actor/Actor.cpp"
-		"Components/Actor/Actor.h"
-		"Components/Actor/ActorController.cpp"
-		"Components/Actor/ActorController.h"
-		"Components/Actor/IActor.cpp"
-		"Components/Actor/IActor.h"
 )
 
+add_sources("Actor_uber.cpp"
+    PROJECTS Game
+    SOURCE_GROUP "Components\\\\Actor"
+		"Components/Actor/Actor.cpp"
+		"Components/Actor/ActorController.cpp"
+		"Components/Actor/IActor.cpp"
+		"Components/Actor/Actor.h"
+		"Components/Actor/ActorController.h"
+		"Components/Actor/IActor.h"
+	SOURCE_GROUP "Components\\\\Actor\\\\Actions"
+		"Components/Actor/Actions/IAction.h"
+	SOURCE_GROUP "Components\\\\Actor\\\\State"
+		"Components/Actor/State/IActorState.h"
+)
+
+add_sources("AI_uber.cpp"
+    PROJECTS Game
+    SOURCE_GROUP "Components\\\\AI"
+		"Components/AI/AIComponent.cpp"
+		"Components/AI/AIEnemy.cpp"
+		"Components/AI/AIComponent.h"
+		"Components/AI/AIEnemy.h"
+		"Components/AI/BehaviorTree.h"
+    SOURCE_GROUP "Components\\\\AI\\\\Nodes"
+		"Components/AI/Nodes/TestNode.cpp"
+		"Components/AI/Nodes/TestNode.h"
+	SOURCE_GROUP "Components\\\\AI\\\\Trees"
+		"Components/AI/Trees/ITree.h"
+)
+
+add_sources("Additional_uber.cpp"
+    PROJECTS Game
+    SOURCE_GROUP "Components\\\\Attributes"
+		"Components/Attributes/Attributes.h"
+	SOURCE_GROUP "Components\\\\Inventory"
+		"Components/Inventory/Inventory.h"
+)
+
+add_sources("Player_uber.cpp"
+    PROJECTS Game
+    SOURCE_GROUP "Components\\\\Player"
+		"Components/Player/Player.cpp"
+		"Components/Player/Player.h"
+	SOURCE_GROUP "Components\\\\Player\\\\Camera"
+		"Components/Player/Camera/CameraManager.cpp"
+		"Components/Player/Camera/CameraManager.h"
+		"Components/Player/Camera/ICameraMode.h"
+		"Components/Player/Camera/TopdownCameraMode.h"
+		"Components/Player/Camera/InventoryCameraMode.h"
+	SOURCE_GROUP "Components\\\\Player\\\\Input"
+		"Components/Player/Input/Input.h"
+)
 add_sources("Console_uber.cpp"
     PROJECTS Game
     SOURCE_GROUP "Console"
 		"Console/CVars.cpp"
 		"Console/CVars.h"
 )
-
-add_sources("Utils_uber.cpp"
+add_sources("Utils_uber.cpp" 
     PROJECTS Game
     SOURCE_GROUP "Utils"
 		"Utils/Logger.h"

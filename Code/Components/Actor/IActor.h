@@ -23,9 +23,8 @@ protected:
 #pragma endregion
 
 public:
-	virtual void OnKill() = 0;
-	virtual void OnSpawn() = 0;
 
+	virtual void Revive() = 0;
 protected:
 	virtual void Update(float fFrameTime) = 0;
 

@@ -1,13 +1,19 @@
 #pragma once
 #include "IActor.h"
 #include "GamePlugin.h"
+#include "ActorController.h"
+#include "Components/Inventory/Inventory.h"
+#include "Components/Attributes/Attributes.h"
+#include <vector>
+#include "Actions/IAction.h"
 
 class CActor : public IActor
 {
 #pragma region base
 public:
 	// Provide a virtual destructor, ensuring correct destruction of IEntityComponent members
-	virtual ~CActor() = default;
+	virtual ~CActor();
+	void Initialize() override;
 	virtual uint64 GetEventMask() const override;
 	virtual void ProcessEvent(const SEntityEvent& event) override;
 	static void ReflectType(Schematyc::CTypeDesc<CActor>& desc)
@@ -19,10 +25,33 @@ public:
 		desc.SetComponentFlags({ EFlags::Transform });
 	}
 #pragma endregion base
-	void OnKill() override {};
-	void OnSpawn() override {};
 
-protected:
+
+private:
+	void UpdateActions(float fFrameTime);
 	void Update(float fFrameTime) override;
-};
+	void Revive() override;
+
+public:
+	void QueueAction(IActorAction* action) { _actionQueue.push_back(action); }
+	void ClearActionQueue() { _actionQueue.clear(); }
+
+	CActorController*	GetController() { return m_pActorController; }
+	CInventory*			GetInventory()	{ return m_pInventory; }
+	IEntityFactionComponent* GetFactionComponent() { return m_pFactionComponent; }
+
+	float GetHealth() { return _healthAttribute->GetValue(); }
+	void DamageActor(const float value) { _healthAttribute->ChangeValue(-value, true); }
+private:
+	CActorController*	m_pActorController = nullptr;
+	CInventory*			m_pInventory = nullptr; //equipment: weapon,armour,skills? and consumables
+	IEntityFactionComponent* m_pFactionComponent = nullptr;
+
+	CAttribute* _healthAttribute = nullptr;
+	std::vector<IActorAction*> _actionQueue;
+
+	float slowupdate = 0;
+};	
+
+
 
