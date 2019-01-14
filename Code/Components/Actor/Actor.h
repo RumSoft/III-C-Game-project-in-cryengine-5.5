@@ -6,6 +6,7 @@
 #include "Components/Attributes/Attributes.h"
 #include <vector>
 #include "Actions/IAction.h"
+#include <AIDebugRenderer.h>
 
 class CActor : public IActor
 {
@@ -49,7 +50,7 @@ private:
 
 	CAttribute* _healthAttribute = nullptr;
 	std::vector<IActorAction*> _actionQueue;
-
+	
 	float slowupdate = 0;
 };	
 

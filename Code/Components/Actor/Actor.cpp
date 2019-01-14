@@ -3,6 +3,10 @@
 #include <CryMath/Random.h>
 #include "Components/Actor/Actions/IAction.h"
 
+#include <FlashUI/FlashUI.h>
+#include <AIDebugRenderer.h>
+#include <UIDraw/UIDraw.h>
+#include "Utils/DebugRenderer.h"
 
 uint64 CActor::GetEventMask() const
 {
@@ -36,6 +40,7 @@ void CActor::Initialize()
 {
 	Logger::Get().Log(GetEntity()->GetName(), "initialized");
 	m_pActorController = GetEntity()->GetOrCreateComponentClass<CActorController>();
+
 	_healthAttribute = new CAttribute(100.f, 10.f, 2.f);
 	_healthAttribute->SetAttributeEmptyCallback([this]() {
 		Logger::Get().Log(GetEntity()->GetName(), "killed");
@@ -69,11 +74,14 @@ void CActor::Update(float fFrameTime)
 
 	_healthAttribute->Update(fFrameTime);
 
-	slowupdate += fFrameTime;
+	gEnv->pAISystem->GetAIDebugRenderer()->Draw3dLabelEx(GetEntity()->GetWorldPos() + Vec3(0, 0, 2), 5, ColorB(255, 155, 155), true, true, false, true, "xdd");
 
+	slowupdate += fFrameTime;
 	if (slowupdate >= 5){
 		slowupdate = 0;
 		//GetController()->GetNavigationComponent()->NavigateTo(Vec3(5, 5, 0) + GetEntity()->GetWorldPos());
+
+
 	}
 }
 

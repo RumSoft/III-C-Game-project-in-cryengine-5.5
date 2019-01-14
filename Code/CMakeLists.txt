@@ -36,6 +36,7 @@ add_sources("Actor_uber.cpp"
 		"Components/Actor/ActorController.h"
 		"Components/Actor/IActor.h"
 	SOURCE_GROUP "Components\\\\Actor\\\\Actions"
+		"Components/Actor/Actions/IAction.cpp"
 		"Components/Actor/Actions/IAction.h"
 	SOURCE_GROUP "Components\\\\Actor\\\\State"
 		"Components/Actor/State/IActorState.h"
@@ -90,6 +91,7 @@ add_sources("Utils_uber.cpp"
 		"Utils/Logger.h"
 		"Utils/MovingAverage.h"
 		"Utils/StringConversions.h"
+		"Utils/DebugRenderer.h"
 )
 
 end_sources()

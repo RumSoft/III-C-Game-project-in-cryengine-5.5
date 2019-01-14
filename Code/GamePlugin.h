@@ -54,10 +54,10 @@ public:
 	// Return true to allow disconnection, otherwise false to keep client.
 	virtual bool OnClientTimingOut(int channelId, EDisconnectionCause cause, const char* description) override { return true; }
 	// ~INetworkedClientListener
-
 protected:
 	// Map containing player components, key is the channel id received in OnClientConnectionReceived
 	std::unordered_map<int, EntityId> m_players;
+
 };
 
 template<typename T>

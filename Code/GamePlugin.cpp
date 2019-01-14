@@ -48,6 +48,7 @@ bool CGamePlugin::Initialize(SSystemGlobalEnvironment& env, const SSystemInitPar
 	//BehaviorTree::INodeFactory& factory = gEnv->pAISystem->GetIBehaviorTreeManager()->GetNodeFactory();
 	//ExposeBehaviorTreeNodeToFactory(factory, MyNode);
 	//factory.RegisterNodeCreator(&NodeCreator<MyNode>("MyNodeNodeCreator"));
+
 	return true;
 }
 
