@@ -74,7 +74,7 @@ void CActor::Update(float fFrameTime)
 
 	_healthAttribute->Update(fFrameTime);
 
-	gEnv->pAISystem->GetAIDebugRenderer()->Draw3dLabelEx(Vec3(ZERO), 5, ColorB(255, 155, 155), true, true, false, true, "xdd");
+	gEnv->pAISystem->GetAIDebugRenderer()->Draw3dLabel(GetEntity()->GetWorldPos(), 1, GetEntity()->GetName());
 
 	slowupdate += fFrameTime;
 	if (slowupdate >= 5){
