@@ -57,7 +57,7 @@ void CActor::Revive()
 
 void CActor::UpdateActions(const float fFrameTime)
 {
-	if (_actionQueue.size() == 0)
+	if (_actionQueue.empty())
 		return;
 
 	for (auto it = _actionQueue.begin(); it != _actionQueue.end(); /* NOTHING */)
