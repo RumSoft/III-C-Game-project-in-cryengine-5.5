@@ -1,0 +1,3 @@
+<SkeletonList>
+ <Skeleton name="skeleton_player_generic" file="Objects/characters/human/generic/skeleton_player_generic.chr"/>
+</SkeletonList>

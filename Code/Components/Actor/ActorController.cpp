@@ -16,17 +16,19 @@ void CActorController::Initialize()
 	m_pNavigation = GetEntity()->GetOrCreateComponent<IEntityNavigationComponent>();
 
 	//CAdvancedAnimationComponent
+	//
 	m_pAnimation->SetMannequinAnimationDatabaseFile("Animations/Mannequin/ADB/human.adb");
 	m_pAnimation->SetCharacterFile("objects/testchar/testchar.cdf");
-	m_pAnimation->SetControllerDefinitionFile("Animations/Mannequin/ADB/playerControllerDefs.xml");
-	//m_pAnimation->SetDefaultScopeContextName("FirstPersonCharacter");
-	m_pAnimation->SetDefaultFragmentName("idlePose");
+	m_pAnimation->SetControllerDefinitionFile("Animations/Mannequin/ADB/humanControllerDefs.xml");
+	m_pAnimation->SetDefaultScopeContextName("Char3P");
+	m_pAnimation->SetDefaultFragmentName("breath");
 	m_pAnimation->SetAnimationDrivenMotion(false);
 	m_pAnimation->LoadFromDisk();
 	m_pAnimation->ResetCharacter();
 
-	m_idleFragmentId = m_pAnimation->GetFragmentId("idlePose");
-	m_walkFragmentId = m_pAnimation->GetFragmentId("swim_idle_underwater_nw_01");
+	m_idleFragmentId = m_pAnimation->GetFragmentId("breath");
+	m_pAnimation->fragme
+	m_walkFragmentId = m_pAnimation->GetFragmentId("reload");
 	m_rotateTagId = m_pAnimation->GetTagId("Rotate");
 
 	//CCharacterControllerComponent
