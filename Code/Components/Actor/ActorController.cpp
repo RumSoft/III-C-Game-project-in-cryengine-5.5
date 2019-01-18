@@ -21,14 +21,13 @@ void CActorController::Initialize()
 	m_pAnimation->SetCharacterFile("objects/testchar/testchar.cdf");
 	m_pAnimation->SetControllerDefinitionFile("Animations/Mannequin/ADB/humanControllerDefs.xml");
 	m_pAnimation->SetDefaultScopeContextName("Char3P");
-	m_pAnimation->SetDefaultFragmentName("breath");
+	m_pAnimation->SetDefaultFragmentName("Motion_Idle");
 	m_pAnimation->SetAnimationDrivenMotion(false);
 	m_pAnimation->LoadFromDisk();
 	m_pAnimation->ResetCharacter();
 
-	m_idleFragmentId = m_pAnimation->GetFragmentId("breath");
-	m_pAnimation->fragme
-	m_walkFragmentId = m_pAnimation->GetFragmentId("reload");
+	m_idleFragmentId = m_pAnimation->GetFragmentId("Motion_Idle");
+	m_walkFragmentId = m_pAnimation->GetFragmentId("Motion_Move");
 	m_rotateTagId = m_pAnimation->GetTagId("Rotate");
 
 	//CCharacterControllerComponent
