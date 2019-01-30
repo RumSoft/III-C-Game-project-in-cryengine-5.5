@@ -19,7 +19,7 @@ public:
 			.GetRotated(Vec3(0,0,-1), _rotationZ);
 		Logger::Get().Log("Camera offset", Vec3ToString(offset));
 
-		m_cameraMatrix = Matrix34(Vec3(1,1,1), rotation, position + offset);
+		m_cameraMatrix = Matrix34(Vec3(1,1,1), rotation, position + offset );
 	}
 	void OnActivate() override
 	{

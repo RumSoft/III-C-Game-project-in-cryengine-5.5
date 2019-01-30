@@ -9,12 +9,14 @@ public:
 		IsZoomEnabled = false;
 	};
 	~CInventoryCameraMode() override {};
+
 	void Update(Matrix34 playerTM) override
 	{
-		auto position = playerTM.GetTranslation();
 		auto rot = Quat(playerTM);
-		auto offset = Vec3(0, -5, 0);
-		m_cameraMatrix = Matrix34(Vec3(1, 1, 1), rot, position + offset*rot);
+		const auto offset = Vec3(2, 5, 0).GetRotated(Vec3(0, 0, 1), rot.GetRotZ());
+		const auto cameraPos = Vec3(0, 0, 1) + playerTM.GetTranslation() + offset;
+		const auto rotation = rot.CreateRotationZ(rot.GetRotZ() + DEG2RAD(180));
+		m_cameraMatrix = Matrix34(Vec3(1, 1, 1), rotation, cameraPos);
 	};
 	void OnActivate() override
 	{

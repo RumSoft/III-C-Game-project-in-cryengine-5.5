@@ -45,6 +45,7 @@ void CActor::Initialize()
 	_healthAttribute->SetAttributeEmptyCallback([this]() {
 		Logger::Get().Log(GetEntity()->GetName(), "killed");
 	});
+	
 }
 
 void CActor::Revive()
@@ -74,8 +75,8 @@ void CActor::Update(float fFrameTime)
 
 	_healthAttribute->Update(fFrameTime);
 
-	gEnv->pAISystem->GetAIDebugRenderer()->Draw3dLabel(GetEntity()->GetWorldPos(), 1, GetEntity()->GetName());
-
+	IRenderAuxText::DrawLabel(GetEntity()->GetWorldPos() + Vec3(0,0,2), 2, GetEntity()->GetName());
+	
 	slowupdate += fFrameTime;
 	if (slowupdate >= 5){
 		slowupdate = 0;

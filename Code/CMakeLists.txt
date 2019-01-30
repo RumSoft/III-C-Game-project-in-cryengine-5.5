@@ -20,6 +20,7 @@ add_sources("Code_uber.cpp"
 		"StdAfx.cpp"
 		"GamePlugin.h"
 		"StdAfx.h"
+		"Codemap.dgml"
 )
 add_sources("Components_uber.cpp"
     PROJECTS Game

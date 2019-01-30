@@ -18,7 +18,7 @@ void CActorController::Initialize()
 	//CAdvancedAnimationComponent
 	//
 	m_pAnimation->SetMannequinAnimationDatabaseFile("Animations/Mannequin/ADB/human.adb");
-	m_pAnimation->SetCharacterFile("objects/testchar/testchar.cdf");
+	m_pAnimation->SetCharacterFile("objects/Characters/Human/human.cdf");
 	m_pAnimation->SetControllerDefinitionFile("Animations/Mannequin/ADB/humanControllerDefs.xml");
 	m_pAnimation->SetDefaultScopeContextName("Char3P");
 	m_pAnimation->SetDefaultFragmentName("Motion_Idle");
@@ -46,12 +46,17 @@ void CActorController::Initialize()
 		m_movementSpeed, m_movementSpeed, m_movementSpeed, m_movementSpeed, m_movementSpeed, 2, true
 		});
 	m_pNavigation->SetStateUpdatedCallback([this](const Vec3& recommendedVelocity) {
+		//if(m_pCharacterController->GetVelocity().IsZeroFast())
+		//{
+		//	m_pCharacterController->ChangeVelocity(Vec3(0, 10, 0).GetRotated(Vec3(0,0,1), GetEntity()->GetRotation().GetRotZ()), CCharacterControllerComponent::EChangeVelocityMode::SetAsTarget);
+		//}
 		m_pCharacterController->ChangeVelocity(recommendedVelocity,
 		                                       Cry::DefaultComponents::CCharacterControllerComponent::
 		                                       EChangeVelocityMode::SetAsTarget);
 	});
 	m_pNavigation->SetNavigationAgentType("MediumSizedCharacters");
 
+	m_pAnimation->GetCharacter()->GetIAttachmentManager()->CreateAttachment("helmet", 'helm', "Bip01 Head", false);
 }
 
 uint64 CActorController::GetEventMask() const
