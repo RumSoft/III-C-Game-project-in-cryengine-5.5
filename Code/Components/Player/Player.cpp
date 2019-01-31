@@ -20,7 +20,7 @@ void CPlayerComponent::Initialize()
 	m_pCursorComponent = m_pEntity->GetOrCreateComponent<CProjectorLightComponent>();
 	m_pActor = GetEntity()->GetOrCreateComponent<CActor>();
 
-	m_pInputComponent->RegisterAction("player", "walkto", [this](int activationMode, float value)
+	m_pInputComponent->RegisterAction("player", "walkto", [this](const int activationMode, float value)
 	{
 		if (activationMode == eAAM_OnPress)
 		{
@@ -40,7 +40,7 @@ uint64 CPlayerComponent::GetEventMask() const
 		| ENTITY_EVENT_BIT(ENTITY_EVENT_RESET);
 }
 
-void CPlayerComponent::Update(float fFrameTime)
+void CPlayerComponent::Update(const float fFrameTime)
 {
 	gEnv->pAuxGeomRenderer->Draw2dLabel(10, 10, 1.75, ColorF(1, 1, 1), false, Logger::Get().ReadLog());
 	gEnv->pAuxGeomRenderer->Draw2dLabel(30, 300,
@@ -62,7 +62,7 @@ void CPlayerComponent::ProcessEvent(const SEntityEvent& event)
 	case ENTITY_EVENT_DONE:
 		break;
 	case ENTITY_EVENT_UPDATE:
-		auto pCtx = (SEntityUpdateContext*)event.nParam[0];
+		const auto pCtx = reinterpret_cast<SEntityUpdateContext*>(event.nParam[0]);
 		Update(pCtx->fFrameTime);
 
 		break;
