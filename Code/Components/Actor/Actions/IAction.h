@@ -59,9 +59,9 @@ public:
 
 class PickupItemAction : public ActorAction
 {
-	SItemComponent* _item = nullptr;
+	SItem* _item = nullptr;
 public:
-	PickupItemAction(SItemComponent* item) : _item(item)
+	PickupItemAction(SItem* item) : _item(item)
 	{
 		NextAction = new ChaseEntityAction(item->GetEntity());
 	}

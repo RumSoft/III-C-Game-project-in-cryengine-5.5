@@ -1,19 +1,21 @@
 #include "StdAfx.h"
 #include "Item.h"
+#include <CryPhysics/physinterface.h>
+#include <CryEntitySystem/IEntity.h>
 
-void SItemComponent::Initialize()
+void SItem::Initialize()
 {
 	LoadGeometry();
 	SetMaterial();
 	Physicalize();
 }
 
-uint64 SItemComponent::GetEventMask() const
+uint64 SItem::GetEventMask() const
 {
 	return ENTITY_EVENT_BIT(ENTITY_EVENT_COMPONENT_PROPERTY_CHANGED);
 }
 
-void SItemComponent::ProcessEvent(const SEntityEvent& event)
+void SItem::ProcessEvent(const SEntityEvent& event)
 {
 	if (event.event == ENTITY_EVENT_COMPONENT_PROPERTY_CHANGED)
 	{
@@ -27,21 +29,21 @@ void SItemComponent::ProcessEvent(const SEntityEvent& event)
 	}
 }
 
-void SItemComponent::ReflectType(Schematyc::CTypeDesc<SItemComponent>& desc)
+void SItem::ReflectType(Schematyc::CTypeDesc<SItem>& desc)
 {
 	desc.SetGUID(SItemGuid);
 	desc.SetEditorCategory("Items");
 	desc.SetLabel("ItemComponent");
 	desc.SetDescription("Base item component");
-	desc.AddMember(&SItemComponent::sItemProperties, 'itep', "ItemProperties", "Item settings", "All properties of this item.", SItemProperties());
+	desc.AddMember(&SItem::sItemProperties, 'itep', "ItemProperties", "Item settings", "All properties of this item.", SItemProperties());
 }
 
-bool SItemComponent::IsPickable()
+bool SItem::IsPickable()
 {
 	return !m_pOwnerEntity;
 }
 
-void SItemComponent::PickUp(IEntity* pNewOwner)
+void SItem::PickUp(IEntity* pNewOwner)
 {
 	if (!pNewOwner)
 		return;
@@ -49,12 +51,12 @@ void SItemComponent::PickUp(IEntity* pNewOwner)
 	m_pOwnerEntity->AttachChild(GetEntity());
 }
 
-void SItemComponent::Drop()
+void SItem::Drop()
 {
 
 }
 
-void SItemComponent::LoadGeometry()
+void SItem::LoadGeometry()
 {
 	string sGeomPath = GetProperties()->sRenderProperties.sGeomPath.value.c_str();
 	if (sGeomPath.empty())
@@ -65,7 +67,7 @@ void SItemComponent::LoadGeometry()
 	m_pEntity->LoadGeometry(GEOMETRY_SLOT, sGeomPath);
 }
 
-void SItemComponent::Physicalize()
+void SItem::Physicalize()
 {
 
 	SEntityPhysicalizeParams physParams;
@@ -74,7 +76,7 @@ void SItemComponent::Physicalize()
 	GetEntity()->Physicalize(physParams);
 }
 
-void SItemComponent::SetMaterial()
+void SItem::SetMaterial()
 {
 	const string sMaterialPath = GetProperties()->sRenderProperties.sMaterial.value.c_str();
 	const auto material = gEnv->p3DEngine->GetMaterialManager()->LoadMaterial(sMaterialPath);
@@ -82,4 +84,4 @@ void SItemComponent::SetMaterial()
 }
 
 
-CRY_STATIC_AUTO_REGISTER_FUNCTION(&registerComponent<SItemComponent>)
+CRY_STATIC_AUTO_REGISTER_FUNCTION(&registerComponent<SItem>)

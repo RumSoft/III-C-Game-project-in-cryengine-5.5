@@ -5,8 +5,6 @@
 
 #define INVENTORY_CAPACITY 3
 
-struct SItemComponent;
-
 class CInventory final : public IEntityComponent
 {
 public:
@@ -18,12 +16,12 @@ public:
 	virtual uint64 GetEventMask() const override;
 	virtual void ProcessEvent(const SEntityEvent& event) override;
 
-	bool AddItem(SItemComponent* pNewItem);
-	bool AddItem(int slot, SItemComponent* pNewItem);
+	bool AddItem(SItem* pNewItem);
+	bool AddItem(int slot, SItem* pNewItem);
 	void RemoveItem(int slot);
-	void RemoveItem(SItemComponent* pNewItem);
-	int GetItemSlot(SItemComponent* pItem);
-	SItemComponent* GetItem(int slot);
+	void RemoveItem(SItem* pNewItem);
+	int GetItemSlot(SItem* pItem);
+	SItem* GetItem(int slot);
 private:
-	SItemComponent* pItems[INVENTORY_CAPACITY] = { nullptr };
+	SItem* pItems[INVENTORY_CAPACITY] = { nullptr };
 };

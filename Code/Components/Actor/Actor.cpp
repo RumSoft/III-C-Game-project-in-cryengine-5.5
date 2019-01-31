@@ -7,6 +7,7 @@
 #include <AIDebugRenderer.h>
 #include <UIDraw/UIDraw.h>
 #include "Utils/DebugRenderer.h"
+#include "Utils/Logger.h"
 
 uint64 CActor::GetEventMask() const
 {
@@ -39,7 +40,7 @@ CActor::~CActor()
 void CActor::Initialize()
 {
 	m_pActorController = GetEntity()->GetOrCreateComponentClass<CActorController>();
-
+	m_pInventory = GetEntity()->GetOrCreateComponentClass<CInventory>();
 	_healthAttribute = new CAttribute(100.f, 10.f, 2.f);
 	_healthAttribute->SetAttributeEmptyCallback([this]() {
 		Logger::Get().Log(GetEntity()->GetName(), "killed");

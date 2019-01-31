@@ -32,7 +32,7 @@ void CInventory::ProcessEvent(const SEntityEvent& event)
 	}
 }
 
-bool CInventory::AddItem(SItemComponent* pNewItem)
+bool CInventory::AddItem(SItem* pNewItem)
 {
 	if (!pNewItem)
 		return false;
@@ -49,7 +49,7 @@ bool CInventory::AddItem(SItemComponent* pNewItem)
 	return false;
 }
 
-bool CInventory::AddItem(const int slot, SItemComponent* pNewItem)
+bool CInventory::AddItem(const int slot, SItem* pNewItem)
 {
 	if (!pNewItem)
 		return false;
@@ -69,7 +69,7 @@ void CInventory::RemoveItem(const int slot)
 }
 
 
-void CInventory::RemoveItem(SItemComponent* pNewItem)
+void CInventory::RemoveItem(SItem* pNewItem)
 {
 	if (!pNewItem)
 		return;
@@ -81,7 +81,7 @@ void CInventory::RemoveItem(SItemComponent* pNewItem)
 	pItems[slot] = nullptr;
 }
 
-int CInventory::GetItemSlot(SItemComponent* pItem)
+int CInventory::GetItemSlot(SItem* pItem)
 {
 	if (!pItem)
 		return -1;
@@ -91,9 +91,11 @@ int CInventory::GetItemSlot(SItemComponent* pItem)
 	return -1;
 }
 
-SItemComponent* CInventory::GetItem(const int slot)
+SItem* CInventory::GetItem(const int slot)
 {
 	if (slot < 0 || slot >= INVENTORY_CAPACITY)
 		return nullptr;
 	return pItems[slot];
 }
+
+CRY_STATIC_AUTO_REGISTER_FUNCTION(&registerComponent<CInventory>)

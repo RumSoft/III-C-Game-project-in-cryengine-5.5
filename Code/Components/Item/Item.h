@@ -4,17 +4,17 @@
 #include "GamePlugin.h"
 #include "ItemProperties.h"
 
-struct SItemComponent : public IEntityComponent
+class SItem : public IEntityComponent
 {
 public:
-	SItemComponent() = default;
-	~SItemComponent() = default;
+	SItem() = default;
+	~SItem() = default;
 
 	
 	virtual void Initialize() override;
 	virtual uint64 GetEventMask() const override;
 	virtual void ProcessEvent(const SEntityEvent& event) override;
-	static void ReflectType(Schematyc::CTypeDesc<SItemComponent>& desc);
+	static void ReflectType(Schematyc::CTypeDesc<SItem>& desc);
 
 	virtual bool IsPickable();
 	virtual void PickUp(IEntity* pNewOwner);

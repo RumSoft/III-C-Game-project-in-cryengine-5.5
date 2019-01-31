@@ -122,7 +122,7 @@ void CPlayerComponent::UpdateMouse(float fFrameTime)
 		{
 			if ((_mouseHitTarget = gEnv->pEntitySystem->GetEntityFromPhysics(_mouseRaycastHit.pCollider))) {
 				
-				if(const auto item = _mouseHitTarget->GetComponent<SItemComponent>())
+				if(const auto item = _mouseHitTarget->GetComponent<SItem>())
 				{
 					if (_click)
 						GetActor()->QueueAction(new PickupItemAction(item));
