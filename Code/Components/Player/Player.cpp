@@ -25,9 +25,12 @@ void CPlayerComponent::Initialize()
 	{
 		if (activationMode == eAAM_OnPress)
 		{
-			Snackbar::Get().Log("clicked, navigating");
-			GetActor()->QueueAction(new MoveToAction(_mousePos));
+			_click = true;
+			if(!_mouseHitTarget) 
+				GetActor()->QueueAction(new MoveToAction(_mousePos));
 		}
+		else
+			_click = false;
 	});
 	m_pInputComponent->BindAction("player", "walkto", eAID_KeyboardMouse, EKeyId::eKI_Mouse1);
 	Revive();
@@ -46,7 +49,7 @@ void CPlayerComponent::Update(const float fFrameTime)
 	gEnv->pAuxGeomRenderer->Draw2dLabel(10, 10, 1.75, ColorF(1, 1, 1), false, Logger::Get().ReadLog());
 	gEnv->pAuxGeomRenderer->Draw2dLabel(30, 300,
 		1.75, ColorF(1, 1, 1), false, Snackbar::Get().ReadLog());
-
+	IRenderAuxText::Draw2dLabel(300, 300, 2, ColorB(255, 255, 255), true, "%d", GetActor()->_actionQueue.size());
 	UpdateMouse(fFrameTime);
 }
 
@@ -99,7 +102,7 @@ void CPlayerComponent::UpdateMouse(float fFrameTime)
 
 	// Invert mouse Y
 	_mouseScreen.y = gEnv->pRenderer->GetHeight() - _mouseScreen.y;
-
+	
 	Vec3 p1(0, 0, 0), p2(0, 0, 0);
 	gEnv->pRenderer->UnProjectFromScreen(_mouseScreen.x, _mouseScreen.y, 0, &p1.x, &p1.y, &p1.z);
 	gEnv->pRenderer->UnProjectFromScreen(_mouseScreen.x, _mouseScreen.y, 1, &p2.x, &p2.y, &p2.z);
@@ -117,10 +120,13 @@ void CPlayerComponent::UpdateMouse(float fFrameTime)
 
 		if(_mouseRaycastHit.pCollider)
 		{
-			if (const auto hitEntity = gEnv->pEntitySystem->GetEntityFromPhysics(_mouseRaycastHit.pCollider)) {
-				if(auto item = hitEntity->GetComponent<SItemComponent>())
+			if ((_mouseHitTarget = gEnv->pEntitySystem->GetEntityFromPhysics(_mouseRaycastHit.pCollider))) {
+				
+				if(const auto item = _mouseHitTarget->GetComponent<SItemComponent>())
 				{
-					IRenderAuxText::DrawLabel(hitEntity->GetWorldPos(), 2, hitEntity->GetName());
+					if (_click)
+						GetActor()->QueueAction(new PickupItemAction(item));
+					IRenderAuxText::DrawLabel(_mouseHitTarget->GetWorldPos(), 2, _mouseHitTarget->GetName());
 				}
 			}
 		}

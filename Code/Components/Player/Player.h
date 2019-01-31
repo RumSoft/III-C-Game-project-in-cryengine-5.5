@@ -77,7 +77,7 @@ private:
 	IEntity* _mouseHitTarget = nullptr;
 
 	bool inventoryMode = false;
-
+	bool _click = false;
 	void UpdateCursor();
 
 };

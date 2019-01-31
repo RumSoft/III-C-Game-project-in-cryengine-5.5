@@ -15,16 +15,43 @@
 #endif
 
 #define controller GetController()
-#define entityPos GetEntity()->GetWorldPos()
 
-void MoveToAction::Process(CActor* actor)
+//if less than 1m, do not move
+#define MOVE_TRESHOLD 1
+#define LEN GetLength2D()
+#define DISTANCE(a,b) (a - b).LEN
+#define POS GetWorldPos()
+#define ENT GetEntity()
+
+bool MoveToAction::Process(CActor* actor)
 {
+	if (DISTANCE(actor->ENT->POS, _pos) < MOVE_TRESHOLD)
+		return true;
 	actor->controller->nav->moveTo(_pos);
+	return false;
 }
 
-void MoveByAction::Process(CActor* actor)
+bool MoveByAction::Process(CActor* actor)
 {
-	actor->controller->nav->moveTo(actor->entityPos + _offset);
+	if (_offset.LEN < MOVE_TRESHOLD)
+		return true;
+	actor->controller->nav->moveTo(actor->ENT->POS + _offset);
+	return false;
 }
 
+bool ChaseEntityAction::Process(CActor* actor)
+{
+	if (DISTANCE(actor->ENT->POS, _entity->POS) < MOVE_TRESHOLD)
+		return true;
+	actor->controller->nav->moveTo(_entity->POS);
+	return false;
+}
 
+bool PickupItemAction::Process(CActor* actor)
+{
+	if (NextAction->Process(actor))
+	{
+		return true;
+	}
+	return false;
+}

@@ -54,6 +54,16 @@ void CActor::Revive()
 	
 }
 
+void CActor::QueueAction(IActorAction* action)
+{
+	for (auto it = _actionQueue.begin(); it != _actionQueue.end(); /* NOTHING */)
+		if ((*it)->GetType() == action->GetType())
+			it = _actionQueue.erase(it);
+		else
+			++it;
+	_actionQueue.push_back(action);
+}
+
 
 void CActor::UpdateActions(const float fFrameTime)
 {
@@ -62,25 +72,23 @@ void CActor::UpdateActions(const float fFrameTime)
 
 	for (auto it = _actionQueue.begin(); it != _actionQueue.end(); /* NOTHING */)
 	{
-		(*it)->Process(this);
-		it = _actionQueue.erase(it);
+		if ((*it)->Process(this))
+			it = _actionQueue.erase(it);
+		else
+			++it;
 	}
 
 }
 
 void CActor::Update(float fFrameTime)
 {
-	UpdateActions(fFrameTime);
-
 	_healthAttribute->Update(fFrameTime);
 
 	IRenderAuxText::DrawLabelF(GetEntity()->GetWorldPos() + Vec3(0, 0, 2), 2, "%s, %.1f/%.1f", GetEntity()->GetName(), _healthAttribute->GetValue(), _healthAttribute->GetMaxValue());
 	slowupdate += fFrameTime;
-	if (slowupdate >= 5){
+	if (slowupdate >= 0.2){
 		slowupdate = 0;
-		//GetController()->GetNavigationComponent()->NavigateTo(Vec3(5, 5, 0) + GetEntity()->GetWorldPos());
-
-
+		UpdateActions(fFrameTime);
 	}
 }
 

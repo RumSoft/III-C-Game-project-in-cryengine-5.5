@@ -34,21 +34,20 @@ private:
 	void Revive() override;
 
 public:
-	void QueueAction(IActorAction* action) { _actionQueue.push_back(action); }
+	void QueueAction(IActorAction* action);
 	void ClearActionQueue() { _actionQueue.clear(); }
 
 	CActorController*	GetController() { return m_pActorController; }
 	CInventory*			GetInventory()	{ return m_pInventory; }
-	IEntityFactionComponent* GetFactionComponent() { return m_pFactionComponent; }
 
 	float GetHealth() { return _healthAttribute->GetValue(); }
 	void DamageActor(const float value) { _healthAttribute->ChangeValue(-value, true); }
 private:
 	CActorController*	m_pActorController = nullptr;
 	CInventory*			m_pInventory = nullptr; //equipment: weapon,armour,skills? and consumables
-	IEntityFactionComponent* m_pFactionComponent = nullptr;
 
 	CAttribute* _healthAttribute = nullptr;
+public:
 	std::vector<IActorAction*> _actionQueue;
 	
 	float slowupdate = 0;
