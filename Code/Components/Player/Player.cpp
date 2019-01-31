@@ -80,9 +80,9 @@ void CPlayerComponent::Revive()
 
 		// Offset the player in the center of the map
 		const float heightOffset = 20.f;
-		float terrainCenter = gEnv->p3DEngine->GetTerrainSize() / 2.f;
-		float height = gEnv->p3DEngine->GetTerrainZ(terrainCenter, terrainCenter);
-		Vec3 playerPosition = Vec3(terrainCenter, terrainCenter, height + heightOffset);
+		const float terrainCenter = gEnv->p3DEngine->GetTerrainSize() / 2.f;
+		const float height = gEnv->p3DEngine->GetTerrainZ(terrainCenter, terrainCenter);
+		const Vec3 playerPosition = Vec3(terrainCenter, terrainCenter, height + heightOffset);
 
 		m_pEntity->SetWorldTM(Matrix34::Create(playerScale, playerRotation, playerPosition));
 
