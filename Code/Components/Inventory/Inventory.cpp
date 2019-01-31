@@ -68,7 +68,6 @@ void CInventory::RemoveItem(const int slot)
 		pItems[slot] = nullptr;
 }
 
-
 void CInventory::RemoveItem(SItem* pNewItem)
 {
 	if (!pNewItem)

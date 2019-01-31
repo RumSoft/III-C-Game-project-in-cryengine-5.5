@@ -3,7 +3,7 @@
 #include <CryEntitySystem/IEntitySystem.h>
 #include "Components/Item/Item.h"
 
-#define INVENTORY_CAPACITY 3
+#define INVENTORY_CAPACITY 20
 
 class CInventory final : public IEntityComponent
 {

@@ -10,6 +10,8 @@
 #include "Components/Item/Item.h"
 #include "Components/AI/AIComponent.h"
 #include "Components/AI/AIEnemy.h"
+#include <DefaultComponents/Geometry/AdvancedAnimationComponent.h>
+#include "Components/Actor/Actions/IAction.h"
 
 CPlayerComponent::~CPlayerComponent()
 {
@@ -62,8 +64,6 @@ void CPlayerComponent::ProcessEvent(const SEntityEvent& event)
 		break;
 	case ENTITY_EVENT_START_GAME:
 		Revive();
-		break;
-	case ENTITY_EVENT_DONE:
 		break;
 	case ENTITY_EVENT_UPDATE:
 		const auto pCtx = reinterpret_cast<SEntityUpdateContext*>(event.nParam[0]);
