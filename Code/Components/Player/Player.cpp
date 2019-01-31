@@ -75,8 +75,8 @@ void CPlayerComponent::Revive()
 	// Set player transformation, but skip this in the Editor
 	if (!gEnv->IsEditor())
 	{
-		Vec3 playerScale = Vec3(1.f);
-		Quat playerRotation = IDENTITY;
+		const Vec3 playerScale = Vec3(1.f);
+		const Quat playerRotation = IDENTITY;
 
 		// Offset the player in the center of the map
 		const float heightOffset = 20.f;
