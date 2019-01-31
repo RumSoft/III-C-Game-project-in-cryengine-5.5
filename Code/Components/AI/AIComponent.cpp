@@ -1,5 +1,6 @@
 #include "StdAfx.h"
 #include "AIComponent.h"
+#include "Components/Actor/Actor.h"
 
 CAIComponent::~CAIComponent()
 {

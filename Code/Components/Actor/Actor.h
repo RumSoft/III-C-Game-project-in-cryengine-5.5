@@ -40,7 +40,7 @@ public:
 	CActorController*	GetController() { return m_pActorController; }
 	CInventory*			GetInventory()	{ return m_pInventory; }
 
-	float GetHealth() { return _healthAttribute->GetValue(); }
+	CAttribute* GetHealth() { return _healthAttribute; }
 	void DamageActor(const float value) { _healthAttribute->ChangeValue(-value, true); }
 private:
 	CActorController*	m_pActorController = nullptr;

@@ -23,9 +23,10 @@ public:
 		desc.SetComponentFlags({ EFlags::Transform });
 	}
 #pragma endregion
-protected:
+
 	CActor* GetActor() { return m_pActor; }
 	void Update(float fFrameTime);
+
 private:
 	CActor* m_pActor = nullptr;
 	float slowupdate = 0;

@@ -8,6 +8,8 @@
 #include "Utils/StringConversions.h"
 #include <CryInput/IHardwareMouse.h>
 #include "Components/Item/Item.h"
+#include "Components/AI/AIComponent.h"
+#include "Components/AI/AIEnemy.h"
 
 CPlayerComponent::~CPlayerComponent()
 {
@@ -125,6 +127,14 @@ void CPlayerComponent::UpdateMouse(float fFrameTime)
 					if (_click)
 						GetActor()->QueueAction(new PickupItemAction(item));
 					IRenderAuxText::DrawLabel(_mouseHitTarget->GetWorldPos(), 2, _mouseHitTarget->GetName());
+				}
+				if(const auto AIActor = _mouseHitTarget->GetComponent<CAIEnemy>())
+				{
+					if (_click){}
+					IRenderAuxText::DrawLabelF(AIActor->GetEntity()->GetWorldPos() + Vec3(0, 0, 2), 2, "%s, %.1f/%.1f",
+					                           AIActor->GetEntity()->GetName(),
+					                           AIActor->GetActor()->GetHealth()->GetValue(),
+					                           AIActor->GetActor()->GetHealth()->GetMaxValue());
 				}
 			}
 		}

@@ -83,8 +83,6 @@ void CActor::UpdateActions(const float fFrameTime)
 void CActor::Update(float fFrameTime)
 {
 	_healthAttribute->Update(fFrameTime);
-
-	IRenderAuxText::DrawLabelF(GetEntity()->GetWorldPos() + Vec3(0, 0, 2), 2, "%s, %.1f/%.1f", GetEntity()->GetName(), _healthAttribute->GetValue(), _healthAttribute->GetMaxValue());
 	slowupdate += fFrameTime;
 	if (slowupdate >= 0.2){
 		slowupdate = 0;

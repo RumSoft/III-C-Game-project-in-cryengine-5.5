@@ -49,8 +49,12 @@ bool ChaseEntityAction::Process(CActor* actor)
 
 bool PickupItemAction::Process(CActor* actor)
 {
+	if (!_item->IsPickable())
+		return false;
+
 	if (NextAction->Process(actor))
 	{
+		_item->PickUp(actor->GetEntity());
 		return true;
 	}
 	return false;
