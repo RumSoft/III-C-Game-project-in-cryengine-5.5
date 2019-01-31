@@ -63,6 +63,11 @@ add_sources("Items_uber.cpp"
 	SOURCE_GROUP "Components\\\\Item"
 		"Components/Item/Item.cpp"
 		"Components/Item/Item.h"
+		"Components/Item/ItemProperties.h"
+	SOURCE_GROUP "Components\\\\Item\\\\MeleeWeapon"
+		"Components/Item/MeleeWeapon/MeleeWeapon.cpp"
+		"Components/Item/MeleeWeapon/MeleeWeapon.h"
+		"Components/Item/MeleeWeapon/MeleeWeaponProperties.h"
 )
 
 add_sources("Additional_uber.cpp"
@@ -70,6 +75,7 @@ add_sources("Additional_uber.cpp"
     SOURCE_GROUP "Components\\\\Attributes"
 		"Components/Attributes/Attributes.h"
 	SOURCE_GROUP "Components\\\\Inventory"
+		"Components/Inventory/Inventory.cpp"
 		"Components/Inventory/Inventory.h"
 )
 

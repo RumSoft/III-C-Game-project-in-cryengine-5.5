@@ -84,3 +84,5 @@ static void registerComponent(Schematyc::IEnvRegistrar& registrar)
 #define SItemSPhysicsPropsGuid	"{B6EC37B5-F436-4AAC-AF2C-4D7EE73F5E42}"_cry_guid
 #define SItemSRenderPropsGuid	"{309F8F44-AA34-47AA-86C9-0315D0D6B66C}"_cry_guid
 #define CCameraManagerGUID		"{9DB97454-C11B-445F-83D1-166B1E059075}"_cry_guid
+#define CMeleeWeaponGUID		"{B3525EE9-4C30-46C5-BA37-E0163FF57B5A}"_cry_guid
+#define CMeleeWeaponPropsGUID	"{43028B36-3957-4ECF-A1CC-26701859D616}"_cry_guid

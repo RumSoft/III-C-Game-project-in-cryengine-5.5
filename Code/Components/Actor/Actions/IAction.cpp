@@ -22,6 +22,7 @@
 #define DISTANCE(a,b) (a - b).LEN
 #define POS GetWorldPos()
 #define ENT GetEntity()
+#define INV GetInventory()
 
 bool MoveToAction::Process(CActor* actor)
 {
@@ -49,12 +50,18 @@ bool ChaseEntityAction::Process(CActor* actor)
 
 bool PickupItemAction::Process(CActor* actor)
 {
-	if (!_item->IsPickable())
-		return false;
+	if (!_item || !_item->IsPickable())
+		return true; //return true to finish action
 
 	if (NextAction->Process(actor))
 	{
-		_item->PickUp(actor->GetEntity());
+		if (actor->INV->AddItem(_item)) {
+			_item->PickUp(actor->ENT);
+		}
+		else
+		{
+			//couldn't pick up, return true to finish
+		}
 		return true;
 	}
 	return false;
