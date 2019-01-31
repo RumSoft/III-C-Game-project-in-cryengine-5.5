@@ -38,7 +38,6 @@ CActor::~CActor()
 
 void CActor::Initialize()
 {
-	Logger::Get().Log(GetEntity()->GetName(), "initialized");
 	m_pActorController = GetEntity()->GetOrCreateComponentClass<CActorController>();
 
 	_healthAttribute = new CAttribute(100.f, 10.f, 2.f);
@@ -75,8 +74,7 @@ void CActor::Update(float fFrameTime)
 
 	_healthAttribute->Update(fFrameTime);
 
-	IRenderAuxText::DrawLabel(GetEntity()->GetWorldPos() + Vec3(0,0,2), 2, GetEntity()->GetName());
-	
+	IRenderAuxText::DrawLabelF(GetEntity()->GetWorldPos() + Vec3(0, 0, 2), 2, "%s, %.1f/%.1f", GetEntity()->GetName(), _healthAttribute->GetValue(), _healthAttribute->GetMaxValue());
 	slowupdate += fFrameTime;
 	if (slowupdate >= 5){
 		slowupdate = 0;

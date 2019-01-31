@@ -7,6 +7,7 @@
 #include "Utils/Logger.h"
 #include "Utils/StringConversions.h"
 #include <CryInput/IHardwareMouse.h>
+#include "Components/Item/Item.h"
 
 CPlayerComponent::~CPlayerComponent()
 {
@@ -110,8 +111,19 @@ void CPlayerComponent::UpdateMouse(float fFrameTime)
 		rwi_stop_at_pierceable | rwi_colltype_any, &_mouseRaycastHit, 1))
 	{
 		_mousePos = _mouseRaycastHit.pt;
+
 		gEnv->pAuxGeomRenderer->DrawSphere(_mousePos, 0.1, ColorB(255, 0, 255), false);
 		UpdateCursor();
+
+		if(_mouseRaycastHit.pCollider)
+		{
+			if (const auto hitEntity = gEnv->pEntitySystem->GetEntityFromPhysics(_mouseRaycastHit.pCollider)) {
+				if(auto item = hitEntity->GetComponent<SItemComponent>())
+				{
+					IRenderAuxText::DrawLabel(hitEntity->GetWorldPos(), 2, hitEntity->GetName());
+				}
+			}
+		}
 	}
 }
 

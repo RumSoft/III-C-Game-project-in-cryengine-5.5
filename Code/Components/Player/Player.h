@@ -35,6 +35,8 @@ class CPlayerComponent final : public IEntityComponent
 		MoveBack = 1 << 3
 	};
 
+
+
 public:
 	CPlayerComponent() = default;
 	virtual ~CPlayerComponent();

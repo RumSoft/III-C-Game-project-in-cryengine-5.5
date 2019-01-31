@@ -58,6 +58,13 @@ add_sources("AI_uber.cpp"
 		"Components/AI/Trees/ITree.h"
 )
 
+add_sources("Items_uber.cpp"
+	PROJECTS Game
+	SOURCE_GROUP "Components\\\\Item"
+		"Components/Item/Item.cpp"
+		"Components/Item/Item.h"
+)
+
 add_sources("Additional_uber.cpp"
     PROJECTS Game
     SOURCE_GROUP "Components\\\\Attributes"

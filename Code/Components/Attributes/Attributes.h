@@ -27,8 +27,10 @@ public:
 
 	bool IsFull() { return _currentValue == _maxValue; }
 	bool IsZero() { return _currentValue == ZERO; }
+
 	float GetValue() { return _currentValue; }
-	
+	float GetMaxValue() { return _maxValue; }
+
 	void SetValue(const float setTo, const bool pauseRegen = true)
 	{
 		_currentValue = setTo;
