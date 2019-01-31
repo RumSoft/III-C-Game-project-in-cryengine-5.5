@@ -47,7 +47,6 @@ private:
 	CInventory*			m_pInventory = nullptr; //equipment: weapon,armour,skills? and consumables
 
 	CAttribute* _healthAttribute = nullptr;
-public:
 	std::vector<IActorAction*> _actionQueue;
 	
 	float slowupdate = 0;

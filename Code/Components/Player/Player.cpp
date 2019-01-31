@@ -47,9 +47,7 @@ uint64 CPlayerComponent::GetEventMask() const
 void CPlayerComponent::Update(const float fFrameTime)
 {
 	gEnv->pAuxGeomRenderer->Draw2dLabel(10, 10, 1.75, ColorF(1, 1, 1), false, Logger::Get().ReadLog());
-	gEnv->pAuxGeomRenderer->Draw2dLabel(30, 300,
-		1.75, ColorF(1, 1, 1), false, Snackbar::Get().ReadLog());
-	IRenderAuxText::Draw2dLabel(300, 300, 2, ColorB(255, 255, 255), true, "%d", GetActor()->_actionQueue.size());
+	gEnv->pAuxGeomRenderer->Draw2dLabel(30, 300,1.75, ColorF(1, 1, 1), false, Snackbar::Get().ReadLog());
 	UpdateMouse(fFrameTime);
 }
 
@@ -145,7 +143,7 @@ void CPlayerComponent::UpdateCursor()
 	const auto dir = GetEntity()->GetWorldRotation();
 	m_pCursorComponent->SetTransformMatrix(
 		Matrix34(Vec3(1, 1, 1),
-			Quat::CreateRotationY(DEG2RAD(90)) ,
+			Quat::CreateRotationY(DEG2RAD(90)),
 			Vec3(0, 0, 1) - offset * dir));
 }
 
