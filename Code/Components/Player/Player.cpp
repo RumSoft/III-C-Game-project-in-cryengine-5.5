@@ -8,13 +8,16 @@
 #include "Utils/StringConversions.h"
 #include <CryInput/IHardwareMouse.h>
 
+CPlayerComponent::~CPlayerComponent()
+{
+
+}
+
 void CPlayerComponent::Initialize()
 {
-	// Create the camera component, will automatically update the viewport every frame
 	m_pCameraManager = GetEntity()->GetOrCreateComponent<CCameraManager>();
-	// Get the input component, wraps access to action mapping so we can easily get callbacks when inputs are triggered
-	m_pInputComponent = m_pEntity->GetOrCreateComponent<Cry::DefaultComponents::CInputComponent>();
-
+	m_pInputComponent = m_pEntity->GetOrCreateComponent<CInputComponent>();
+	m_pCursorComponent = m_pEntity->GetOrCreateComponent<CProjectorLightComponent>();
 	m_pActor = GetEntity()->GetOrCreateComponent<CActor>();
 
 	m_pInputComponent->RegisterAction("player", "walkto", [this](int activationMode, float value)
@@ -26,8 +29,8 @@ void CPlayerComponent::Initialize()
 		}
 	});
 	m_pInputComponent->BindAction("player", "walkto", eAID_KeyboardMouse, EKeyId::eKI_Mouse1);
-
 	Revive();
+
 }
 
 uint64 CPlayerComponent::GetEventMask() const
@@ -39,9 +42,6 @@ uint64 CPlayerComponent::GetEventMask() const
 
 void CPlayerComponent::Update(float fFrameTime)
 {
-	Logger::Get().Log("player position", Vec3ToString(GetEntity()->GetWorldPos()));
-	Logger::Get().Log("player orientantion", QuatToString(GetEntity()->GetWorldRotation()));
-
 	gEnv->pAuxGeomRenderer->Draw2dLabel(10, 10, 1.75, ColorF(1, 1, 1), false, Logger::Get().ReadLog());
 	gEnv->pAuxGeomRenderer->Draw2dLabel(30, 300,
 		1.75, ColorF(1, 1, 1), false, Snackbar::Get().ReadLog());
@@ -59,8 +59,10 @@ void CPlayerComponent::ProcessEvent(const SEntityEvent& event)
 	case ENTITY_EVENT_START_GAME:
 		Revive();
 		break;
+	case ENTITY_EVENT_DONE:
+		break;
 	case ENTITY_EVENT_UPDATE:
-		SEntityUpdateContext* pCtx = (SEntityUpdateContext*)event.nParam[0];
+		auto pCtx = (SEntityUpdateContext*)event.nParam[0];
 		Update(pCtx->fFrameTime);
 
 		break;
@@ -83,34 +85,33 @@ void CPlayerComponent::Revive()
 		Vec3 playerPosition = Vec3(terrainCenter, terrainCenter, height + heightOffset);
 
 		m_pEntity->SetWorldTM(Matrix34::Create(playerScale, playerRotation, playerPosition));
+
+
 	}
-
-
-
-	// Unhide the entity in case hidden by the Editor
 	GetEntity()->Hide(false);
 }
 
 void CPlayerComponent::UpdateMouse(float fFrameTime)
 {
+
 	gEnv->pHardwareMouse->GetHardwareMouseClientPosition(&_mouseScreen.x, &_mouseScreen.y);
 
 	// Invert mouse Y
 	_mouseScreen.y = gEnv->pRenderer->GetHeight() - _mouseScreen.y;
 
-	Vec3 p1(0, 0, 0), p2(0,0,0);
+	Vec3 p1(0, 0, 0), p2(0, 0, 0);
 	gEnv->pRenderer->UnProjectFromScreen(_mouseScreen.x, _mouseScreen.y, 0, &p1.x, &p1.y, &p1.z);
 	gEnv->pRenderer->UnProjectFromScreen(_mouseScreen.x, _mouseScreen.y, 1, &p2.x, &p2.y, &p2.z);
 
 	Vec3 dir = p2 - p1;
 	dir.Normalize();
 
-
 	if (gEnv->pPhysicalWorld->RayWorldIntersection(p1, dir * gEnv->p3DEngine->GetMaxViewDistance(), ent_all,
-	                                               rwi_stop_at_pierceable | rwi_colltype_any, &_mouseRaycastHit, 1))
+		rwi_stop_at_pierceable | rwi_colltype_any, &_mouseRaycastHit, 1))
 	{
 		_mousePos = _mouseRaycastHit.pt;
 		gEnv->pAuxGeomRenderer->DrawSphere(_mousePos, 0.1, ColorB(255, 0, 255), false);
+		UpdateCursor();
 	}
 }
 
@@ -119,14 +120,14 @@ void CPlayerComponent::HandleInputFlagChange(TInputFlags flags, int activationMo
 
 }
 
-void CPlayerComponent::CreatePulse()
-{
 
+void CPlayerComponent::UpdateCursor()
+{
+	const auto offset = GetEntity()->GetWorldPos() - _mousePos;
+	const auto dir = GetEntity()->GetWorldRotation();
+	m_pCursorComponent->SetTransformMatrix(
+		Matrix34(Vec3(1, 1, 1),
+			Quat::CreateRotationY(DEG2RAD(90)) ,
+			Vec3(0, 0, 1) - offset * dir));
 }
 
-void CPlayerComponent::CreateExplosion()
-{
-	Snackbar::Get().Log("created explosion");
-
-	gEnv->pPhysicalWorld->SimulateExplosion(_mousePos, Vec3(1, 1, 1), 0.5, 1, 0.75, 1);
-}

@@ -7,6 +7,7 @@
 
 #include <DefaultComponents/Cameras/CameraComponent.h>
 #include <DefaultComponents/Input/InputComponent.h>
+#include <DefaultComponents/Lights/ProjectorLightComponent.h>
 #include "Components/Actor/Actor.h"
 #include "Camera/CameraManager.h"
 
@@ -36,7 +37,7 @@ class CPlayerComponent final : public IEntityComponent
 
 public:
 	CPlayerComponent() = default;
-	virtual ~CPlayerComponent() {}
+	virtual ~CPlayerComponent();
 
 	friend CGamePlugin;
 	// IEntityComponent
@@ -51,6 +52,7 @@ public:
 		desc.SetGUID("{63F4C0C6-32AF-4ACB-8FB0-57D45DD14725}"_cry_guid);
 	}
 
+	
 	void Revive();
 	void UpdateMouse(float fFrameTime);
 	void Update(float fFrameTime);
@@ -63,14 +65,17 @@ protected:
 private:
 	CCameraManager* m_pCameraManager = nullptr;
 	CInputComponent* m_pInputComponent = nullptr;
+	CProjectorLightComponent* m_pCursorComponent = nullptr;
+	
 	CActor* m_pActor = nullptr;
-
+	 
 	Vec2 _mouseScreen = ZERO;
 	Vec3 _mousePos = ZERO;
 	ray_hit _mouseRaycastHit{};
+	IEntity* _mouseHitTarget = nullptr;
 
 	bool inventoryMode = false;
 
-	void CreatePulse();
-	void CreateExplosion();
+	void UpdateCursor();
+
 };
