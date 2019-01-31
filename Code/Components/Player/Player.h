@@ -45,6 +45,7 @@ public:
 	// IEntityComponent
 	virtual void Initialize() override;
 	virtual uint64 GetEventMask() const override;
+	
 	virtual void ProcessEvent(const SEntityEvent& event) override;
 	// ~IEntityComponent
 
@@ -58,9 +59,10 @@ public:
 	void Revive();
 	void UpdateMouse(float fFrameTime);
 	void Update(float fFrameTime);
+	void QueueAction(IActorAction* action);
 
 	CActor* GetActor() { return m_pActor; }
-
+	CCameraManager* GetCameraManager() { return m_pCameraManager; }
 protected:
 	void HandleInputFlagChange(TInputFlags flags, int activationMode, EInputFlagType type = EInputFlagType::Hold);
 
@@ -79,5 +81,7 @@ private:
 	bool inventoryMode = false;
 	bool _click = false;
 	void UpdateCursor();
+	void DrawInventory();
 
+	ITexture* _invBgTex;
 };

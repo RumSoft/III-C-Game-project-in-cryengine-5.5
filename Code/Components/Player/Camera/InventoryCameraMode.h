@@ -1,14 +1,17 @@
 #pragma once
 #include "ICameraMode.h"
+#include <FlashUI/FlashUI.h>
 
 class CInventoryCameraMode : public ICameraMode
 {
 public:
 	CInventoryCameraMode()
 	{
-		IsZoomEnabled = false;
+		_isZoomEnabled = false;
+		_isActionsEnabled = false;
+		_isCursorEnabled = false;
 	};
-	~CInventoryCameraMode() override {};
+	~CInventoryCameraMode() = default;
 
 	void Update(Matrix34 playerTM) override
 	{
@@ -18,15 +21,13 @@ public:
 		const auto rotation = rot.CreateRotationZ(rot.GetRotZ() + DEG2RAD(180));
 		m_cameraMatrix = Matrix34(Vec3(1, 1, 1), rotation, cameraPos);
 	};
+
 	void OnActivate() override
 	{
 		gEnv->pConsole->ExecuteString("t_scale 0.1");
-	};
+	}
 	void OnDeactivate() override
 	{
 		gEnv->pConsole->ExecuteString("t_scale 1");
-	};
-
-private:
-
+	}
 };

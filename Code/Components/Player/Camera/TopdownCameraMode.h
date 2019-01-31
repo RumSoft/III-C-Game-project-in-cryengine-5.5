@@ -6,8 +6,9 @@ class CTopdownCameraMode : public ICameraMode
 public:
 	CTopdownCameraMode()
 	{
-		IsZoomEnabled = true;
-		IsCursorEnabled = true;
+		_isZoomEnabled = true;
+		_isActionsEnabled = true;
+		_isCursorEnabled = true;
 	}
 	~CTopdownCameraMode() override {}
 	void Update(Matrix34 playerTM) override
@@ -23,7 +24,7 @@ public:
 	}
 	void OnActivate() override
 	{
-		gEnv->pHardwareMouse->UseSystemCursor(IsCursorEnabled);
+		gEnv->pHardwareMouse->UseSystemCursor(_isCursorEnabled);
 	}
 	void OnDeactivate() override
 	{

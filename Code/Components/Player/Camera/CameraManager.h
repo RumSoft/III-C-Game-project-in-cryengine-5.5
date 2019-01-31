@@ -8,6 +8,7 @@
 
 class CCameraManager : public IEntityComponent
 {
+public:
 	enum ECameraMode
 	{
 		eCameraMode_NoCamera = -1,
@@ -39,6 +40,9 @@ private:
 public:
 	void Update(float fFrameTime);
 	void SetCameraMode(ECameraMode mode);
+	bool IsActionsEnabled() { return GetCameraMode()->IsActionsEnabled();	}
+	bool IsZoomEnabled()	{ return GetCameraMode()->IsZoomEnabled();		}
+	bool IsCursorEnabled()	{ return GetCameraMode()->IsCursorEnabled();	}
 private:
 	ECameraMode GetCameraModeType() const { return m_currentMode; }
 	ICameraMode* GetCameraMode() const { return m_cameraModes[m_currentMode]; }

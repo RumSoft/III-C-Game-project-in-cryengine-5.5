@@ -16,20 +16,9 @@ void CCameraManager::Initialize()
 	m_pInputComponent->RegisterAction("camera", "tpv_zoom_out", [this](int, float) { m_zoomDelta += 1.0f; });
 	m_pInputComponent->BindAction("camera", "tpv_zoom_out", eAID_KeyboardMouse, EKeyId::eKI_MouseWheelDown);
 
-	m_pInputComponent->RegisterAction("camera", "inventory", [this](int activationmode, float) { 
-		if (activationmode == eIS_Released)
-		if (GetCameraModeType() == eCameraMode_Topdown)
-			SetCameraMode(eCameraMode_Inventory);
-		else
-			SetCameraMode(eCameraMode_Topdown);
-	 });
-	m_pInputComponent->BindAction("camera", "inventory", eAID_KeyboardMouse, EKeyId::eKI_I);
-
 
 	m_cameraModes[eCameraMode_Topdown] = new CTopdownCameraMode();
 	m_cameraModes[eCameraMode_Inventory] = new CInventoryCameraMode();
-
-
 	m_currentMode = eCameraMode_Topdown;
 }
 

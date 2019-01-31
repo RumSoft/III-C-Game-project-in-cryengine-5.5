@@ -17,9 +17,15 @@ public:
 
 	CCamera& GetCamera() { return m_camera; }
 
+	virtual bool IsActionsEnabled() { return _isActionsEnabled; }
+	virtual bool IsZoomEnabled()	{ return _isZoomEnabled; }
+	virtual bool IsCursorEnabled()	{ return _isCursorEnabled; }
+
 protected:
-	bool IsZoomEnabled = true;
-	bool IsCursorEnabled = false;
+	bool _isActionsEnabled	= false;
+	bool _isZoomEnabled		= true;
+	bool _isCursorEnabled	= false;
+
 	float m_zoomDistance = 10;
 	float m_fov = 65;
 	Matrix34 m_cameraMatrix{ ZERO, IDENTITY };

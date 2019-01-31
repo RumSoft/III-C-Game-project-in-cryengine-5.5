@@ -30,13 +30,26 @@ void CPlayerComponent::Initialize()
 		if (activationMode == eAAM_OnPress)
 		{
 			_click = true;
-			if(!_mouseHitTarget) 
-				GetActor()->QueueAction(new MoveToAction(_mousePos));
+			if (!_mouseHitTarget)
+				QueueAction(new MoveToAction(_mousePos));
 		}
 		else
 			_click = false;
 	});
 	m_pInputComponent->BindAction("player", "walkto", eAID_KeyboardMouse, EKeyId::eKI_Mouse1);
+
+	m_pInputComponent->RegisterAction("camera", "inventory", [this](int activationmode, float) {
+		if (activationmode == eIS_Released)
+		{
+			inventoryMode = !inventoryMode;
+			GetCameraManager()->SetCameraMode(inventoryMode
+				? CCameraManager::eCameraMode_Inventory
+				: CCameraManager::eCameraMode_Topdown);
+		}
+	});
+	m_pInputComponent->BindAction("camera", "inventory", eAID_KeyboardMouse, EKeyId::eKI_I);
+	_invBgTex = gEnv->pRenderer->EF_LoadTexture("engineassets/textures/grey.dds");
+
 	Revive();
 
 }
@@ -51,8 +64,15 @@ uint64 CPlayerComponent::GetEventMask() const
 void CPlayerComponent::Update(const float fFrameTime)
 {
 	gEnv->pAuxGeomRenderer->Draw2dLabel(10, 10, 1.75, ColorF(1, 1, 1), false, Logger::Get().ReadLog());
-	gEnv->pAuxGeomRenderer->Draw2dLabel(30, 300,1.75, ColorF(1, 1, 1), false, Snackbar::Get().ReadLog());
+	gEnv->pAuxGeomRenderer->Draw2dLabel(30, 300, 1.75, ColorF(1, 1, 1), false, Snackbar::Get().ReadLog());
 	UpdateMouse(fFrameTime);
+}
+
+void CPlayerComponent::QueueAction(IActorAction* action)
+{
+
+	if(GetCameraManager()->IsActionsEnabled())
+		GetActor()->QueueAction(action);
 }
 
 void CPlayerComponent::ProcessEvent(const SEntityEvent& event)
@@ -68,9 +88,16 @@ void CPlayerComponent::ProcessEvent(const SEntityEvent& event)
 	case ENTITY_EVENT_UPDATE:
 		const auto pCtx = reinterpret_cast<SEntityUpdateContext*>(event.nParam[0]);
 		Update(pCtx->fFrameTime);
-
+		if (inventoryMode)
+			DrawInventory();
 		break;
 	}
+}
+
+void CPlayerComponent::DrawInventory()
+{
+	IRenderAuxImage::Draw2dImage(10, 20, gEnv->pRenderer->GetWidth() / 2 - 20, gEnv->pRenderer->GetHeight() - 20, _invBgTex->GetTextureID());
+
 }
 
 void CPlayerComponent::Revive()
@@ -102,7 +129,7 @@ void CPlayerComponent::UpdateMouse(float fFrameTime)
 
 	// Invert mouse Y
 	_mouseScreen.y = gEnv->pRenderer->GetHeight() - _mouseScreen.y;
-	
+
 	Vec3 p1(0, 0, 0), p2(0, 0, 0);
 	gEnv->pRenderer->UnProjectFromScreen(_mouseScreen.x, _mouseScreen.y, 0, &p1.x, &p1.y, &p1.z);
 	gEnv->pRenderer->UnProjectFromScreen(_mouseScreen.x, _mouseScreen.y, 1, &p2.x, &p2.y, &p2.z);
@@ -118,23 +145,23 @@ void CPlayerComponent::UpdateMouse(float fFrameTime)
 		gEnv->pAuxGeomRenderer->DrawSphere(_mousePos, 0.1, ColorB(255, 0, 255), false);
 		UpdateCursor();
 
-		if(_mouseRaycastHit.pCollider)
+		if (_mouseRaycastHit.pCollider)
 		{
 			if ((_mouseHitTarget = gEnv->pEntitySystem->GetEntityFromPhysics(_mouseRaycastHit.pCollider))) {
-				
-				if(const auto item = _mouseHitTarget->GetComponent<SItem>())
+
+				if (const auto item = _mouseHitTarget->GetComponent<SItem>())
 				{
 					if (_click)
-						GetActor()->QueueAction(new PickupItemAction(item));
+						QueueAction(new PickupItemAction(item));
 					IRenderAuxText::DrawLabel(_mouseHitTarget->GetWorldPos(), 2, _mouseHitTarget->GetName());
 				}
-				if(const auto AIActor = _mouseHitTarget->GetComponent<CAIEnemy>())
+				if (const auto AIActor = _mouseHitTarget->GetComponent<CAIEnemy>())
 				{
-					if (_click){}
+					if (_click) {}
 					IRenderAuxText::DrawLabelF(AIActor->GetEntity()->GetWorldPos() + Vec3(0, 0, 2), 2, "%s, %.1f/%.1f",
-					                           AIActor->GetEntity()->GetName(),
-					                           AIActor->GetActor()->GetHealth()->GetValue(),
-					                           AIActor->GetActor()->GetHealth()->GetMaxValue());
+						AIActor->GetEntity()->GetName(),
+						AIActor->GetActor()->GetHealth()->GetValue(),
+						AIActor->GetActor()->GetHealth()->GetMaxValue());
 				}
 			}
 		}
