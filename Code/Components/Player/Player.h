@@ -84,4 +84,5 @@ private:
 	void DrawInventory();
 
 	ITexture* _invBgTex;
+	int _invSelId = 0;
 };

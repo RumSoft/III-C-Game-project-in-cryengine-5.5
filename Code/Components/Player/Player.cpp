@@ -10,6 +10,7 @@
 #include "Components/Item/Item.h"
 #include "Components/AI/AIComponent.h"
 #include "Components/AI/AIEnemy.h"
+#include <CryString/CryString.h>
 #include <DefaultComponents/Geometry/AdvancedAnimationComponent.h>
 #include "Components/Actor/Actions/IAction.h"
 
@@ -48,6 +49,33 @@ void CPlayerComponent::Initialize()
 		}
 	});
 	m_pInputComponent->BindAction("camera", "inventory", eAID_KeyboardMouse, EKeyId::eKI_I);
+
+
+	m_pInputComponent->RegisterAction("inventory", "inventory_moveup", [this](int activationmode, float) {
+		if (activationmode == eIS_Released && inventoryMode)
+			_invSelId = (_invSelId - 1 + GetActor()->GetInventory()->GetInventorySize()) % GetActor()->GetInventory()->GetInventorySize();
+	});
+	m_pInputComponent->RegisterAction("inventory", "inventory_movedown", [this](int activationmode, float) {
+		if (activationmode == eIS_Released && inventoryMode)
+			_invSelId = (_invSelId + 1) % GetActor()->GetInventory()->GetInventorySize();
+	});
+	m_pInputComponent->RegisterAction("inventory", "inventory_drop", [this](int activationmode, float) {
+		if (activationmode == eIS_Released && inventoryMode)
+		{
+			GetActor()->GetInventory()->RemoveItem(GetActor()->GetInventory()->GetItem(_invSelId));
+		}
+	});
+	m_pInputComponent->RegisterAction("inventory", "inventory_equip", [this](int activationmode, float) {
+		if (activationmode == eIS_Released && inventoryMode)
+		{
+			//GetActor()->GetInventory()->
+		}
+	});
+	m_pInputComponent->BindAction("inventory", "inventory_moveup", eAID_KeyboardMouse, EKeyId::eKI_Up);
+	m_pInputComponent->BindAction("inventory", "inventory_movedown", eAID_KeyboardMouse, EKeyId::eKI_Down);
+	m_pInputComponent->BindAction("inventory", "inventory_equip", eAID_KeyboardMouse, EKeyId::eKI_Enter);
+	m_pInputComponent->BindAction("inventory", "inventory_drop", eAID_KeyboardMouse, EKeyId::eKI_X);
+
 	_invBgTex = gEnv->pRenderer->EF_LoadTexture("engineassets/textures/grey.dds");
 
 	Revive();
@@ -71,7 +99,7 @@ void CPlayerComponent::Update(const float fFrameTime)
 void CPlayerComponent::QueueAction(IActorAction* action)
 {
 
-	if(GetCameraManager()->IsActionsEnabled())
+	if (GetCameraManager()->IsActionsEnabled())
 		GetActor()->QueueAction(action);
 }
 
@@ -96,7 +124,30 @@ void CPlayerComponent::ProcessEvent(const SEntityEvent& event)
 
 void CPlayerComponent::DrawInventory()
 {
-	IRenderAuxImage::Draw2dImage(10, 20, gEnv->pRenderer->GetWidth() / 2 - 20, gEnv->pRenderer->GetHeight() - 20, _invBgTex->GetTextureID());
+	const int margin = 20;	
+	const Vec2 bounds[] = { Vec2(margin,margin), Vec2(gEnv->pRenderer->GetWidth() / 2 - 2 * margin, gEnv->pRenderer->GetHeight() - 2 * margin) };
+
+	//bg
+	IRenderAuxImage::Draw2dImage(bounds[0].x, bounds[0].y, bounds[1].x, bounds[1].y, _invBgTex->GetTextureID(), 0, 0, 1, 1, 0, .5, .5, .5, 0.8, 1, 0);
+	
+	//title
+	IRenderAuxText::Draw2dLabel(bounds[0].x + margin, bounds[0].y + margin, 4, ColorF(1, 1, 1), false, "Player inventory");
+
+	//columns names
+	IRenderAuxText::Draw2dLabel(bounds[0].x + margin, bounds[0].y + margin + 70, 2, ColorF(1, 1, 1), false, "Sel Eqp Item name");
+
+	//items
+	CryStringT<char> str;
+	const auto inv = GetActor()->GetInventory();
+	for(int i = 0; i<inv->GetInventorySize(); i++)
+		str.AppendFormat("%s  %s  %s \n", 
+			i == _invSelId ? "[#]" : "[ ]", 
+			inv->GetItem(i) ? "[ ]" : "  " , 
+			inv->GetItem(i) ? inv->GetItem(i)->GetEntity()->GetName() : "");\
+	IRenderAuxText::Draw2dLabel(bounds[0].x + margin, bounds[0].y + margin + 100, 2, ColorF(1, 1, 1), false, str);
+
+	//options
+	IRenderAuxText::Draw2dLabel(bounds[0].x + margin, bounds[0].y + margin + 600, 2, ColorF(1, 1, 1), false, "X - drop item\nENTER - equip item");
 
 }
 

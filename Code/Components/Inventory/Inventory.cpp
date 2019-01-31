@@ -64,8 +64,11 @@ bool CInventory::AddItem(const int slot, SItem* pNewItem)
 
 void CInventory::RemoveItem(const int slot)
 {
+	auto item = this->GetItem(slot);
 	if (slot > -1 && slot < INVENTORY_CAPACITY)
 		pItems[slot] = nullptr;
+	if (item)
+		item->Drop();
 }
 
 void CInventory::RemoveItem(SItem* pNewItem)
@@ -76,6 +79,8 @@ void CInventory::RemoveItem(SItem* pNewItem)
 	const int slot = GetItemSlot(pNewItem);
 	if (slot < 0)
 		return;
+
+	pNewItem->Drop();
 
 	pItems[slot] = nullptr;
 }

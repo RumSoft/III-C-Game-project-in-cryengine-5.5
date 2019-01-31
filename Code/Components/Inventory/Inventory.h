@@ -22,6 +22,8 @@ public:
 	void RemoveItem(SItem* pNewItem);
 	int GetItemSlot(SItem* pItem);
 	SItem* GetItem(int slot);
+	int GetInventorySize() { return INVENTORY_CAPACITY; };
+
 private:
 	SItem* pItems[INVENTORY_CAPACITY] = { nullptr };
 };

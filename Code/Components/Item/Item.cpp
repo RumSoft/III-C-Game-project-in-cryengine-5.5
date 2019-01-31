@@ -53,7 +53,11 @@ void SItem::PickUp(IEntity* pNewOwner)
 
 void SItem::Drop()
 {
+	this->GetEntity()->DetachThis();
+	Matrix34 tm = m_pOwnerEntity->GetWorldTM();
+	this->GetEntity()->SetWorldTM(tm.AddTranslation(Vec3(1, 0, 1)));
 
+	m_pOwnerEntity = nullptr;
 }
 
 void SItem::LoadGeometry()
