@@ -11,7 +11,7 @@ class CAttribute
 public:
 	CAttribute(const float maxValue, const float regenPerS = 0, const float regenOffset = 1)
 		: _currentValue(maxValue), _maxValue(maxValue), _regenerationPerSecond(regenPerS),
-		_regenerationTimeout(regenOffset), _timer(0), _canRegen(false)
+		_regenerationTimeout(regenOffset), _timer(0)
 	{
 
 	}
@@ -34,8 +34,10 @@ public:
 	void SetValue(const float setTo, const bool pauseRegen = true)
 	{
 		_currentValue = setTo;
-		if (pauseRegen)
+		if (pauseRegen) {
 			_timer = 0;
+			_canRegen = !pauseRegen;
+		}
 	}
 	void ChangeValue(const float changeBy, const bool pauseRegen = true)
 	{
@@ -77,7 +79,7 @@ private:
 	float _regenerationTimeout;
 
 	float _timer;
-	bool _canRegen;
+	bool _canRegen = false;
 
 	std::vector<handler_t*> handlerList;
 };

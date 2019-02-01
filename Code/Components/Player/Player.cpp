@@ -76,6 +76,17 @@ void CPlayerComponent::Initialize()
 	m_pInputComponent->BindAction("inventory", "inventory_equip", eAID_KeyboardMouse, EKeyId::eKI_Enter);
 	m_pInputComponent->BindAction("inventory", "inventory_drop", eAID_KeyboardMouse, EKeyId::eKI_X);
 
+
+
+	m_pInputComponent->RegisterAction("skill", "skill1", [this](int activationmode, float) { if (activationmode == eIS_Released && !inventoryMode) { UseSkill(1); } });
+	m_pInputComponent->RegisterAction("skill", "skill2", [this](int activationmode, float) { if (activationmode == eIS_Released && !inventoryMode) { UseSkill(2); } });
+	m_pInputComponent->RegisterAction("skill", "skill3", [this](int activationmode, float) { if (activationmode == eIS_Released && !inventoryMode) { UseSkill(3); } });
+	m_pInputComponent->RegisterAction("skill", "skill4", [this](int activationmode, float) { if (activationmode == eIS_Released && !inventoryMode) { UseSkill(4); } });
+	m_pInputComponent->BindAction("skill", "skill1", eAID_KeyboardMouse, EKeyId::eKI_1);
+	m_pInputComponent->BindAction("skill", "skill2", eAID_KeyboardMouse, EKeyId::eKI_2);
+	m_pInputComponent->BindAction("skill", "skill3", eAID_KeyboardMouse, EKeyId::eKI_3);
+	m_pInputComponent->BindAction("skill", "skill4", eAID_KeyboardMouse, EKeyId::eKI_4);
+
 	_invBgTex = gEnv->pRenderer->EF_LoadTexture("engineassets/textures/grey.dds");
 
 	Revive();
@@ -93,6 +104,7 @@ void CPlayerComponent::Update(const float fFrameTime)
 {
 	gEnv->pAuxGeomRenderer->Draw2dLabel(10, 10, 1.75, ColorF(1, 1, 1), false, Logger::Get().ReadLog());
 	gEnv->pAuxGeomRenderer->Draw2dLabel(30, 300, 1.75, ColorF(1, 1, 1), false, Snackbar::Get().ReadLog());
+	if(GetCameraManager()->IsCursorEnabled())
 	UpdateMouse(fFrameTime);
 }
 
@@ -116,6 +128,7 @@ void CPlayerComponent::ProcessEvent(const SEntityEvent& event)
 	case ENTITY_EVENT_UPDATE:
 		const auto pCtx = reinterpret_cast<SEntityUpdateContext*>(event.nParam[0]);
 		Update(pCtx->fFrameTime);
+		DrawHealth();
 		if (inventoryMode)
 			DrawInventory();
 		break;
@@ -150,6 +163,27 @@ void CPlayerComponent::DrawInventory()
 	IRenderAuxText::Draw2dLabel(bounds[0].x + margin, bounds[0].y + margin + 600, 2, ColorF(1, 1, 1), false, "X - drop item\nENTER - equip item");
 
 }
+
+void CPlayerComponent::DrawHealth()
+{
+	auto health = GetActor()->GetHealth();
+	auto bottomMid = Vec2(gEnv->pRenderer->GetWidth() / 2, gEnv->pRenderer->GetHeight() - 100);
+	CryStringT<char> healthStr = "[";
+	for(int i = 0; i<20; i++)
+		if ((20 * health->GetValue()) / health->GetMaxValue() >= i)
+			healthStr.append("#");
+		else
+			healthStr.append("_");
+	healthStr.append("]");
+	gEnv->pAuxGeomRenderer->Draw2dLabel(bottomMid.x, bottomMid.y, 2, ColorF(1, 0.2, 0.2), true, healthStr);
+}
+
+
+void CPlayerComponent::UseSkill(int n)
+{
+
+}
+
 
 void CPlayerComponent::Revive()
 {
@@ -206,13 +240,24 @@ void CPlayerComponent::UpdateMouse(float fFrameTime)
 						QueueAction(new PickupItemAction(item));
 					IRenderAuxText::DrawLabel(_mouseHitTarget->GetWorldPos(), 2, _mouseHitTarget->GetName());
 				}
-				if (const auto AIActor = _mouseHitTarget->GetComponent<CAIEnemy>())
+				if (const auto aiEnemy = _mouseHitTarget->GetComponent<CAIEnemy>())
 				{
-					if (_click) {}
-					IRenderAuxText::DrawLabelF(AIActor->GetEntity()->GetWorldPos() + Vec3(0, 0, 2), 2, "%s, %.1f/%.1f",
-						AIActor->GetEntity()->GetName(),
-						AIActor->GetActor()->GetHealth()->GetValue(),
-						AIActor->GetActor()->GetHealth()->GetMaxValue());
+					if (_click)
+						QueueAction(new AttackEnemyAction(aiEnemy->GetActor()));
+
+					auto health = aiEnemy->GetActor()->GetHealth();
+					CryStringT<char> healthStr = "[";
+					for (int i = 0; i < 20; i++)
+						if ((20 * health->GetValue()) / health->GetMaxValue() >= i)
+							healthStr.append("#");
+						else
+							healthStr.append("_");
+					healthStr.append("]");
+
+					IRenderAuxText::DrawLabelF(aiEnemy->GetEntity()->GetWorldPos() + Vec3(0, 0, 2), 2, " %s \n %s",
+						aiEnemy->GetEntity()->GetName(), healthStr);
+
+	
 				}
 			}
 		}

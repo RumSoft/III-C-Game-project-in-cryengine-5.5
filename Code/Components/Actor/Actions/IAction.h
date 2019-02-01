@@ -71,3 +71,13 @@ public:
 	ACTION_TYPE GetType() override { return ACTION_MOVE; }
 };
 
+class AttackEnemyAction : public ActorAction
+{
+	CActor* _enemy = nullptr;
+public:
+	AttackEnemyAction(CActor* enemy);
+
+	bool Process(CActor* actor) override;
+
+	ACTION_TYPE GetType() override { return ACTION_MOVE; }
+};

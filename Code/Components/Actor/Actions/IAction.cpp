@@ -66,3 +66,27 @@ bool PickupItemAction::Process(CActor* actor)
 	}
 	return false;
 }
+
+AttackEnemyAction::AttackEnemyAction(CActor* enemy): _enemy(enemy)
+{
+	NextAction = new ChaseEntityAction(enemy->GetEntity());
+}
+
+bool AttackEnemyAction::Process(CActor* actor)
+{
+	if (!_enemy)
+		return true;
+	if(NextAction->Process(actor))
+	{
+		if (_enemy->GetHealth()->IsZero())
+			return true;
+
+		_enemy->DamageActor(10);
+		pe_action_impulse impulse;
+		impulse.impulse = Vec3(0, 0, 10);
+		_enemy->GetEntity()->GetPhysics()->Action(&impulse);
+	}
+	return false;
+}
+
+

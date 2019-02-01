@@ -56,7 +56,7 @@ void SItem::Drop()
 	this->GetEntity()->DetachThis();
 	Matrix34 tm = m_pOwnerEntity->GetWorldTM();
 	this->GetEntity()->SetWorldTM(tm.AddTranslation(Vec3(1, 0, 1)));
-
+	this->Physicalize();
 	m_pOwnerEntity = nullptr;
 }
 

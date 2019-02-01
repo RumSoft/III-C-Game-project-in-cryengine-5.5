@@ -40,16 +40,12 @@ void CActorController::Initialize()
 	
 	//IEntityNavigationComponent
 	m_pNavigation->SetCollisionAvoidanceProperties(IEntityNavigationComponent::SCollisionAvoidanceProperties{
-		1.f, IEntityNavigationComponent::SCollisionAvoidanceProperties::EType::Active
+		0.1f, IEntityNavigationComponent::SCollisionAvoidanceProperties::EType::Active
 		});
 	m_pNavigation->SetMovementProperties(IEntityNavigationComponent::SMovementProperties{
-		m_movementSpeed, m_movementSpeed, m_movementSpeed, m_movementSpeed, m_movementSpeed, 2, true
+		m_movementSpeed, m_movementSpeed, m_movementSpeed, m_movementSpeed, m_movementSpeed, 1, true
 		});
 	m_pNavigation->SetStateUpdatedCallback([this](const Vec3& recommendedVelocity) {
-		//if(m_pCharacterController->GetVelocity().IsZeroFast())
-		//{
-		//	m_pCharacterController->ChangeVelocity(Vec3(0, 10, 0).GetRotated(Vec3(0,0,1), GetEntity()->GetRotation().GetRotZ()), CCharacterControllerComponent::EChangeVelocityMode::SetAsTarget);
-		//}
 		m_pCharacterController->ChangeVelocity(recommendedVelocity,
 		                                       Cry::DefaultComponents::CCharacterControllerComponent::
 		                                       EChangeVelocityMode::SetAsTarget);

@@ -3,6 +3,7 @@
 #include "GamePlugin.h"
 #include "Components/Actor/Actor.h"
 
+
 class CAIComponent : public IEntityComponent
 {
 #pragma region base

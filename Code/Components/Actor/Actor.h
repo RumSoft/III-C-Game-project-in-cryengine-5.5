@@ -6,7 +6,6 @@
 #include "Components/Attributes/Attributes.h"
 #include <vector>
 #include "Actions/IAction.h"
-#include <AIDebugRenderer.h>
 
 class CActor : public IActor
 {
@@ -41,7 +40,7 @@ public:
 	CInventory*			GetInventory()	{ return m_pInventory; }
 
 	CAttribute* GetHealth() { return _healthAttribute; }
-	void DamageActor(const float value) { _healthAttribute->ChangeValue(-value, true); }
+	void DamageActor(const float value);
 private:
 	CActorController*	m_pActorController = nullptr;
 	CInventory*			m_pInventory = nullptr; //equipment: weapon,armour,skills? and consumables

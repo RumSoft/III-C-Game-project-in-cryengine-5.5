@@ -65,6 +65,12 @@ void CActor::QueueAction(IActorAction* action)
 	_actionQueue.push_back(action);
 }
 
+void CActor::DamageActor(const float value)
+{
+	_healthAttribute->ChangeValue(-value, true);
+	if (_healthAttribute->IsZero()) GetEntity()->Hide(true);
+}
+
 
 void CActor::UpdateActions(const float fFrameTime)
 {

@@ -45,7 +45,7 @@ public:
 	// IEntityComponent
 	virtual void Initialize() override;
 	virtual uint64 GetEventMask() const override;
-	
+
 	virtual void ProcessEvent(const SEntityEvent& event) override;
 	// ~IEntityComponent
 
@@ -82,6 +82,9 @@ private:
 	bool _click = false;
 	void UpdateCursor();
 	void DrawInventory();
+	void DrawHealth();
+
+	void UseSkill(int n);
 
 	ITexture* _invBgTex;
 	int _invSelId = 0;
